@@ -13,7 +13,7 @@ class BookmarkRecipe(db.Model):
     bookmark_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('bookmarks.id')), primary_key=True)
 
     recipe = db.relationship('Recipe', backref='bookmark_recipes')
-    bookmark = db.relationship('Bookmark', backref='bookmark_recipes')
+    owner_bookmark = db.relationship('Bookmark', backref='bookmark_recipes')
 
 
     def to_dict(self):
