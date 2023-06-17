@@ -7,4 +7,4 @@ from .comment import Comment
 from .like import Like
 from .recipeimage import RecipeImage
 from .commentimage import CommentImage
-from .bookmarkrecipe import BookmarkRecipe
+from .bookmarkrecipe import bookmarkrecipes
