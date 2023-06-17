@@ -2,23 +2,14 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 
-class BookmarkRecipe(db.Model):
-    __tablename__ = 'bookmarksrecipes'
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+bookmarkrecipes = db.Table(
+    "bookmarkrecipes",
+    db.Model.metadata,
+    db.Column("recipes", db.Integer, db.ForeignKey(add_prefix_for_prod("recipes.id")), primary_key=True),
+    db.Column("bookmarks", db.Integer, db.ForeignKey(add_prefix_for_prod("bookmarks.id")), primary_key=True),
+)
 
-    id = db.Column(db.Integer, primary_key=True)
-    recipe_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('recipes.id')), primary_key=True)
-    bookmark_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('bookmarks.id')), primary_key=True)
-
-    recipe = db.relationship('Recipe', backref='bookmark_recipes')
-    owner_bookmark = db.relationship('Bookmark', backref='bookmark_recipes')
-
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'recipe_id': self.recipe_id,
-            'bookmark_id': self.bookmark_id
-        }
+if environment == "production":
+    bookmarkrecipes.schema = SCHEMA
