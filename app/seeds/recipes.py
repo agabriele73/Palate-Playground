@@ -41,7 +41,11 @@ def seed_recipes():
         owner_id=1,
         title='Macaroni and cheese',
         protein_type=None,
-        
+        steps='In a large pot, bring milk to a boil. Reduce heat to medium-low, add macaroni, and cook, stirring frequently, for about 12 minutes or until the pasta is cooked. Remove from heat, add cheese, and stir until melted and incorporated. Serve and enjoy!',
+        ingredients='4 cups (1 liter) Milk, 12oz (340g) Pasta (elbow macaroni), 7oz (200g) Cheddar cheese (shredded), 1 teaspoon Salt, 1/4 teaspoon Black pepper, 1/4 teaspoon Paprika',
+        prep_time='20 minutes',
+        cook_time='20 minutes',
+        steps_link='https://youtu.be/IzLn0pXntNE'
     )
 
 
@@ -49,6 +53,9 @@ def seed_recipes():
 
 
     db.session.add(demo)
+    db.session.add(recipe1)
+    db.session.add(recipe2)
+    db.session.add(recipe3)
     db.session.commit()
 
 
@@ -57,3 +64,5 @@ def undo_recipes():
         db.session.execute(f"TRUNCATE table {SCHEMA}.recipes RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM recipes"))
+
+    db.session.commit()
