@@ -12,9 +12,8 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('recipes.id')), nullable=False)
 
-    user = db.relationship('User', back_populates='comments')
-    recipe = db.relationship('Recipe', back_populates='comments')
-    comment_images = db.relationship('CommentImage', back_populates='comment')
+    comments_user = db.relationship('User', back_populates='user_comments')
+    recipe_comment = db.relationship('Recipe', back_populates='comments_on_recipe')
 
 
     def to_dict(self):
