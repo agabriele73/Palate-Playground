@@ -9,13 +9,13 @@ class Recipe(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    title = db.Column(db.String(255), nullable=False)
-    protein_type = db.Column(db.String(255), nullable=True)
-    steps = db.Column(db.String(5000), nullable=False)
-    ingredients = db.Column(db.String(5000), nullable=False)
-    prep_time = db.Column(db.String(255), nullable=False)
-    cook_time = db.Column(db.String(255), nullable=False)
-    steps_link = db.Column(db.String(255), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    protein_type = db.Column(db.String(50), nullable=True)
+    steps = db.Column(db.Text, nullable=False)
+    ingredients = db.Column(db.Text, nullable=False)
+    prep_time = db.Column(db.String(50), nullable=False)
+    cook_time = db.Column(db.String(50), nullable=False)
+    steps_link = db.Column(db.String(125), nullable=False)
 
     owned_recipe = db.relationship('User', back_populates='recipe_owner')
     comments_on_recipe = db.relationship('Comment', back_populates='recipe_comment')
@@ -25,7 +25,6 @@ class Recipe(db.Model):
         return {
             'id': self.id,
             'owner_id': self.owner_id,
-            'bookmark_id': self.bookmark_id,
             'title': self.title,
             'protein_type': self.protein_type,
             'steps': self.steps,
