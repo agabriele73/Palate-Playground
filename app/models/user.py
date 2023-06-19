@@ -14,10 +14,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    recipe_owner = db.relationship('Recipe', back_populates='owner')
-    bookmark_owner = db.relationship('Bookmark', back_populates='owner')
-    comments = db.relationship('Comment', back_populates='user')
-    likes = db.relationship('Like', back_populates='user')
+    recipe_owner = db.relationship('Recipe', back_populates='owned_recipe')
+    user_comments = db.relationship('Comment', back_populates='comments_user')
 
     @property
     def password(self):

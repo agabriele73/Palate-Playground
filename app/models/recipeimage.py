@@ -12,7 +12,7 @@ class RecipeImage(db.Model):
     recipe_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('recipes.id')), nullable=False)
     image_url = db.Column(db.String(255), nullable=False)
 
-    recipe = db.relationship('Recipe', back_populates='recipe_images')
+    recipe_imgs = db.relationship('Recipe', back_populates='recipe_w_images')
 
     def to_dict(self):
         return {
