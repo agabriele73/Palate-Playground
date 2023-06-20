@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_required
 from app.forms import RecipeForm, RecipeImageForm
-from app.models import Recipe, RecipeImage, db
+from app.models import Recipe, RecipeImage, User, db
 
 recipe_routes = Blueprint('recipes', __name__)
 def validation_errors_to_error_messages(validation_errors):
@@ -24,6 +24,8 @@ def get_all_recipes():
     for recipe in recipes:
         recipe_images = RecipeImage.query.filter_by(recipe_id=recipe.id).all()
         image_urls = [ image.image_url for image in recipe_images]
+        recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
+        owner = [ owner.username for owner in recipe_owners]
 
         recipe_dict = {
             'id': recipe.id,
@@ -35,7 +37,8 @@ def get_all_recipes():
             'prep_time': recipe.prep_time,
             'cook_time': recipe.cook_time,
             'steps_link': recipe.steps_link,
-            'images': image_urls
+            'images': image_urls,
+            'owner': owner
         }
 
         recipe_data.append(recipe_dict)
