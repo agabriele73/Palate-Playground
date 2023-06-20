@@ -8,7 +8,7 @@ class Recipe(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), name='fk_recipe_owner_id_users', ondelete='CASCADE'), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     protein_type = db.Column(db.String(50), nullable=True)
     steps = db.Column(db.Text, nullable=False)
