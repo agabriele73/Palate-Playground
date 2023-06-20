@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+import re
 
 
 class Recipe(db.Model):
@@ -21,6 +22,12 @@ class Recipe(db.Model):
     comments_on_recipe = db.relationship('Comment', back_populates='recipe_comment')
     recipe_w_images = db.relationship('RecipeImage', back_populates='recipe_imgs')
 
+    # @db.validates('steps_link')
+    # def validate_steps_link(self, key, steps_link):
+    #     if not is_valid_url(steps_link):
+    #         raise ValueError('Invalid url')
+    #     return steps_link
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -33,3 +40,7 @@ class Recipe(db.Model):
             'cook_time': self.cook_time,
             'steps_link': self.steps_link
         }
+    
+# def is_valid_url(url) -> bool:
+#     match = re.match(r"^https:\/\/[0-9A-z.]+.[0-9A-z.]+.[a-z]+$", url)
+#     return bool(match)
