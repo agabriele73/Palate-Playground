@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_required
-from app.forms import RecipeForm
+from app.forms import RecipeForm, RecipeImageForm
 from app.models import Recipe, RecipeImage, db
 
 recipe_routes = Blueprint('recipes', __name__)
@@ -16,7 +16,6 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @recipe_routes.route('', methods=['GET'])
-@login_required
 def get_all_recipes():
 
     recipes = Recipe.query.all()
@@ -118,4 +117,33 @@ def delete_recipe(recipe_id):
     db.session.commit()
 
     return jsonify({'message': 'Successfully deleted'}), 200
+
+@recipe_routes.route('/<int:recipe_id>/images', methods=['POST', 'GET'])
+@login_required
+def add_recipe_image(recipe_id):
+    form = RecipeImageForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    recipe = Recipe.query.get(recipe_id)
+
+    if not recipe:
+        return jsonify({'message': 'Recipe not found'}), 404
+    
+    if recipe.owner_id != current_user.id:
+        return jsonify({'message': 'You do not own this recipe'}), 401
+
+    if form.validate_on_submit():
+
+        image = RecipeImage(
+            recipe_id=recipe_id,
+            image_url=form.data['image_url']
+        )
+
+        db.session.add(image)
+        db.session.commit()
+
+        return jsonify(image.to_dict())
+    
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
