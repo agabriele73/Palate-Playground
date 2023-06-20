@@ -9,8 +9,8 @@ class Comment(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(500), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    recipe_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('recipes.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), name='fk_comment_user_id_users',ondelete="CASCADE"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('recipes.id'), name='fk_comment_recipe_id_recipes', ondelete="CASCADE"), nullable=False)
 
     comments_user = db.relationship('User', back_populates='user_comments')
     recipe_comment = db.relationship('Recipe', back_populates='comments_on_recipe')
