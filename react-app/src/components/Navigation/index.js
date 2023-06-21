@@ -8,6 +8,8 @@ function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 
 	return (
+		<div>
+
 		<ol className="homebutton-profile">
 			<li>
 				<NavLink exact to="/" className="home-button">
@@ -21,6 +23,14 @@ function Navigation({ isLoaded }){
 				</li>
 			)}
 		</ol>
+		<nav className="nav-bar">
+			<NavLink to="/recipes">Recipes</NavLink>
+			<NavLink to="/recipes/chicken">Chicken</NavLink>
+			<NavLink to="/recipes/beef">Beef</NavLink>
+			<NavLink to="/recipes/seafood">Seafood</NavLink>
+			<NavLink to="/recipes/meat-less">Meat-less</NavLink>
+		</nav>
+		</div>
 	);
 }
 

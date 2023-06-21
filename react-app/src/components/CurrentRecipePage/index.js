@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import * as recipeActions from "../../store/recipe";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import "./CurrRecipe.css"
 
 
 
@@ -9,6 +10,8 @@ function CurrentRecipePage() {
     const dispatch = useDispatch();
     const { recipe_id } = useParams();
     const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
+
+    
     
     useEffect(() => {
         dispatch(recipeActions.setCurrentRecipeThunk(recipe_id));
@@ -27,50 +30,52 @@ function CurrentRecipePage() {
         )
     }
 
-    function getYouTubeVideoId(url) {
-        const regex = /(?:youtube.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|[^#]*[?&]v=|youtu.be\/|[^#]+\?(?:.*&)?v=)([^&#?]{11}))/i;
-        const match = url.match(regex);
-        return match && match[1];
-    }
+    // function getYouTubeVideoId(url) {
+    //     const regex = /(?:youtube.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|[^#]*[?&]v=|youtu.be\/|[^#]+\?(?:.*&)?v=)([^&#?]{11}))/i;
+    //     const match = url.match(regex);
+    //     return match && match[1];
+    // }
 
-    return currentRecipe ? (
+    return currentRecipe && currentRecipe.steps_link ? (
         <div className="currentrecipe-container">
-            <h1>{currentRecipe.title}</h1>
-            <h3>recipe by {currentRecipe.owner}</h3>
-            <img src={currentRecipe.images[0]} alt={currentRecipe.title} />
-            <div className="recipe-steps">
-                <h4>steps: </h4>
-                <p>
-                    {currentRecipe.steps}
-                </p>
-            </div>
-            <div className="recipe-times">
-                <h4>prep time: </h4>
-            <p>
-                {currentRecipe.prep_time}
-            </p>
-            <h4>cook time: </h4>
-            <p>
-                {currentRecipe.cook_time}
-            </p>
-            </div>
-            <div className="recipe-ingredients">
-                <h4>ingredients: </h4>
-                {ingredientsList()}
-            </div>
-            <div>
-                <h4>link: </h4>
+            <h1 className="recipe-title">{currentRecipe.title}</h1>
+            <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
+            <div className="recipe-info-grid">
+
+                <img src={currentRecipe.images[0]} alt={currentRecipe.title} className="recipe-img"/>
+                <div className="recipe-video">
+                <h3>link: </h3>
                 <iframe
                     width="560"
                     height="315"
-                    src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentRecipe.steps_link)}`}
+                    src={currentRecipe.steps_link}
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                ></iframe>
+            ></iframe>
             </div>
-
+                <div className="recipe-steps">
+                    <h3>steps: </h3>
+                    <p>
+                        {currentRecipe.steps}
+                    </p>
+                </div>
+                <div className="recipe-times">
+                    <div>
+                        <h3>prep time: </h3>
+                        {currentRecipe.prep_time}
+                    </div>
+                    <div>
+                        <h3>cook time: </h3>
+                        {currentRecipe.cook_time}
+                    </div>
+                </div>
+                <div className="recipe-ingredients">
+                    <h3>ingredients: </h3>
+                    {ingredientsList()}
+                </div>
+            </div>
         </div>
     ) : (
         <h1>Loading...</h1>

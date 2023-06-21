@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 
+
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -52,7 +53,7 @@ function ProfileButton({ user }) {
             </li>
           </>
         ) : (
-          <>
+          <div className="loginsignup-button">
             <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
@@ -64,7 +65,7 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-          </>
+          </div>
         )}
       </ul>
     </>
