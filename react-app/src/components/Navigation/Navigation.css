@@ -5,3 +5,42 @@
 .hidden {
   display: none;
 }
+
+.homebutton-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  margin: 20px;
+  padding: 40px;
+}
+
+
+.profile-button{
+  display: flex;
+  background-color: transparent;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 40px;
+}
+
+.profile-button:hover{
+  box-shadow: 0 0 10px 0px #717744;
+  transition: 0.3s;
+  border: none;
+  border-radius: 5px;
+}
+
+.home-button {
+  display: flex;
+  font-family:  'Oswald', sans-serif;
+  font-size: 18px;
+  color: #080808;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 0;
+  font-weight: bold 700;
+}
