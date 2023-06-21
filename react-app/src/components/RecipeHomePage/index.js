@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import * as recipeActions from "../../store/recipe";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './recipehomepage.css'
 
@@ -33,15 +34,17 @@ function RecipeHomePage() {
             </p>
             <div className="recipe-grid">
                 {slicedRecipes.map((recipe) => (
-                    <div key={recipe.id} className="recipe-card">
-                        <img src={recipe.images[0]} alt={recipe.images} style={{width: "80%", height: "60%", padding:"10px"}}/>
-                        <h4>
-                            {recipe.title}
-                        </h4>
-                        <h6>
-                            recipe by {recipe.owner}
-                        </h6>
-                    </div>
+                    <NavLink to={`/recipes/${recipe.id}`} className="recipe-link">
+                        <div key={recipe.id} className="recipe-card">
+                            <img src={recipe.images[0]} alt={recipe.images} style={{width: "80%", height: "60%"}}/>
+                            <h4>
+                                {recipe.title}
+                            </h4>
+                            <h6>
+                                recipe by {recipe.owner}
+                            </h6>
+                        </div>
+                    </NavLink>
                 ))}
             </div>
         </div>

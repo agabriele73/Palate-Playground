@@ -45,6 +45,32 @@ def get_all_recipes():
 
     return jsonify({"Recipes": recipe_data})
 
+@recipe_routes.route('/<int:recipe_id>', methods=['GET'])
+def get_recipe_byId(recipe_id):
+    recipe = Recipe.query.get(recipe_id)
+    recipe_images = RecipeImage.query.filter_by(recipe_id=recipe.id).all()
+    image_urls = [ image.image_url for image in recipe_images]
+    recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
+    owner = [ owner.username for owner in recipe_owners]
+
+    recipe_dict = {
+        'id': recipe.id,
+        'owner_id': recipe.owner_id,
+        'title': recipe.title,
+        'protein_type': recipe.protein_type,
+        'steps': recipe.steps,
+        'ingredients': recipe.ingredients,
+        'prep_time': recipe.prep_time,
+        'cook_time': recipe.cook_time,
+        'steps_link': recipe.steps_link,
+        'images': image_urls,
+        'owner': owner
+    }
+
+    return jsonify(recipe_dict)
+
+
+
 
 @recipe_routes.route('', methods=['GET', 'POST'])
 @login_required

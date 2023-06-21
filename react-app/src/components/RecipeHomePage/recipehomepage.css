@@ -7,15 +7,24 @@
 
 .recipe-homepage h1 {
     text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 50px;
+    color: #080808;
+    text-decoration: underline;
+    font-weight: bold 700;
+    text-decoration-color: #717744;
     padding: 20px;
     margin: 10px;
 }
 
 .recipe-homepage p {
-    text-indent: 20px;
-    font-size: larger;
-    margin: 20px;
-    padding: 20px;
+    text-indent: 40px;
+    font-size: 36px;
+    margin: 50px;
+    font-family: 'Oswald', sans-serif;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 30px;
     text-align: left;
 }
 
@@ -29,9 +38,33 @@
 
 .recipe-card {
     border: 2px solid #373D20;
+    border-radius: 10px;
+    max-width: 100%;
+    max-height: 100%;
+    width: 400px;
+    height: 500px;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    margin: 20px;
+    cursor: pointer;
 }
 
+.recipe-card img {
+    border-radius: 20px;
+    box-shadow: 0 0 5px 0 #080808;
+}
+
+.recipe-card:hover {
+    box-shadow: 2px 2px 5px 2px #080808;
+    transition: 0.3s;
+    transform: scale(1.02);
+}
+
+.recipe-link {
+    text-decoration: none;
+    color: #080808;
+}

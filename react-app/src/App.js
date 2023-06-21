@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import RecipeHomePage from "./components/RecipeHomePage";
+import CurrentRecipePage from "./components/CurrentRecipePage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -19,6 +20,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <RecipeHomePage />
+          </Route>
+          <Route exact path="/recipes/:recipe_id">
+            <CurrentRecipePage />
           </Route>
         </Switch>
       )}
