@@ -8,5 +8,51 @@ body {
     list-style-type: none;
 }
 
+ul {
+    list-style-type: none;
+}
 
+.user-info {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    right: 60px;
+    top: -10px;
+    align-items: left;
+    justify-content: space-evenly;
+    background-color: #373D20;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 2px #080808;    
+}
+.user-info li {
+    margin: 5px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+}
+
+.user-info button {
+    background-color: #717744;
+    width: 100%;
+    box-shadow: 0 0 5px 0 #080808;
+    border: #080808 solid 2px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.user-info button:hover {
+    background-color: #abac7f;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: scale3d(1.02, 1.02, 1.02);
+}
+.logo {
+    width: 40px; 
+    height: 40px;
+    margin-right: 10px;
+}
+.logo:hover {
+    cursor: pointer;
+    transform: rotate(360deg);
+    transition: 1.0s;
+}
 

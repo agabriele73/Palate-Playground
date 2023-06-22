@@ -9,7 +9,8 @@ class RecipeForm(FlaskForm):
     protein_type = SelectField('protein_type', 
                                 choices=[('chicken', 'chicken'), 
                                         ('beef', 'beef'), 
-                                        ('seafood', 'seafood'), 
+                                        ('seafood', 'seafood'),
+                                        ('vegetarian', 'vegetarian'), 
                                         ('none', 'none')], 
                                         validators=[DataRequired()])
     steps = TextAreaField('steps', validators=[DataRequired()])
