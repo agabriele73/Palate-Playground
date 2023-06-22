@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as recipeActions from "../../store/recipe";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,14 +10,14 @@ function RecipeHomePage() {
     const recipes = useSelector((state) => state.recipe.recipes);
     let slicedRecipes
     
-    const recipesArr = Object.values(recipes).slice(0, 3);
+    const recipesArr = Object.values(recipes);
 
     useEffect(() => {
         dispatch(recipeActions.fetchRecipesThunk());
     }, [dispatch]);
 
-    if (recipes.length > 5) {
-        const randomIndex = Math.floor(Math.random() * recipesArr.length - 1);
+    if (recipesArr.length > 5) {
+        const randomIndex = Math.floor(Math.random() * recipesArr.length);
         slicedRecipes = recipesArr.slice(randomIndex, randomIndex + 3);
     } else {
         slicedRecipes = recipesArr;

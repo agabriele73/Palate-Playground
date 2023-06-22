@@ -13,7 +13,7 @@ function Navigation({ isLoaded }){
 		<ol className="homebutton-profile">
 			<li>
 				<NavLink exact to="/" className="home-button">
-					<img className="logo" src="https://i.imgur.com/9kVqdpa.png" alt="logo" style={{width: '40px', height: '40px', marginRight: '10px'}} />
+					<img className="logo" src="https://i.imgur.com/9kVqdpa.png" alt="logo"  />
 					<h1>Palate PlayGround</h1>
 				</NavLink>
 			</li>

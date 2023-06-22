@@ -21,12 +21,12 @@ function CurrentRecipePage() {
         const ingredientsArr = currentRecipe.ingredients.split(", ");
 
         return (
-            <ul className="recipe-ingredients">
-                {ingredientsArr.map((ingredient) => (
+            <ol className="recipe-ingredients">
+                {ingredientsArr.map((ingredient, index) => (
                     <li key={ingredient}>{ingredient}</li>
 
                 ))}
-            </ul>
+            </ol>
         )
     }
 
@@ -40,11 +40,11 @@ function CurrentRecipePage() {
         <div className="currentrecipe-container">
             <h1 className="recipe-title">{currentRecipe.title}</h1>
             <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
-            <div className="recipe-info-grid">
 
+            <div className="recipe-info-grid">
                 <img src={currentRecipe.images[0]} alt={currentRecipe.title} className="recipe-img"/>
                 <div className="recipe-video">
-                <h3>link: </h3>
+                <h3>follow along: </h3>
                 <iframe
                     width="560"
                     height="315"
@@ -56,11 +56,6 @@ function CurrentRecipePage() {
             ></iframe>
             </div>
                 <div className="recipe-steps">
-                    <h3>steps: </h3>
-                    <p>
-                        {currentRecipe.steps}
-                    </p>
-                </div>
                 <div className="recipe-times">
                     <div>
                         <h3>prep time: </h3>
@@ -71,10 +66,20 @@ function CurrentRecipePage() {
                         {currentRecipe.cook_time}
                     </div>
                 </div>
+                    <h3>steps: </h3>
+                    <p>
+                        {currentRecipe.steps}
+                    </p>
+                </div>
                 <div className="recipe-ingredients">
                     <h3>ingredients: </h3>
                     {ingredientsList()}
                 </div>
+                {/* <div className="recipe-social" style={{display: "flex", justifyContent: "space-evenly", alignItems: "center"}}>
+                    <i className="fa-brands fa-instagram" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
+                    <i className="fa-brands fa-youtube" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
+                    <i className="fa-brands fa-twitch" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
+                </div> */}
             </div>
         </div>
     ) : (

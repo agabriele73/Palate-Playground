@@ -1,0 +1,136 @@
+.recipe-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.recipe-form h1 {
+    color: #373D20;
+    font-family: 'Oswald', sans-serif;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr auto);
+    gap: 10px;
+}
+
+.submit-button {
+    display: flex;
+    grid-column: span 3;
+    width: 100%; 
+    justify-self: center;
+    align-self: center;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.recipe-image {
+    display: block;
+    grid-column: span 3;
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 1px solid #FEFEFE;
+}
+
+.recipe-image label {
+    display: flex;
+    flex-direction: column;
+    color: #373D20;
+    font-family: 'Oswald', sans-serif;
+}
+
+.recipe-image input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #FEFEFE;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 2px 2px 5px 2px #080808;
+}
+
+.submit-button button {
+    background-color: #373D20;
+    color: #FEFEFE;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 2px #080808;
+    cursor: pointer;
+}
+
+.submit-button button:hover {
+    background-color: #717744;
+    transform: scale(1.1);
+}
+.form-item {
+    display: block;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 1px solid #FEFEFE;
+}
+
+.form-item label {
+    display: flex;
+    flex-direction: column;
+    color: #373D20;
+    font-family: 'Oswald', sans-serif;
+}
+
+.form-item input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #FEFEFE;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 2px 2px 5px 2px #080808;
+}
+
+.form-item textarea {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #FEFEFE;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 2px 2px 5px 2px #080808;
+}
+
+.form-item select {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #FEFEFE;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 2px 2px 5px 2px #080808;
+}
+
+.form-item input:focus,
+.form-item textarea:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px #4CAF50;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, ;
+    text-indent: 10px;
+}
+
+.form-item h6 {
+    text-decoration: underline;
+    font-size: 12px;
+}
