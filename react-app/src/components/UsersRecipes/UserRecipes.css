@@ -1,0 +1,64 @@
+.user-recipes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-recipes-container h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 50px;
+    text-decoration: underline;
+    color: #373d20;
+}
+.recipe-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.recipe-link img {
+    width: 200px;
+    height: 200px;
+}
+.recipe-card {
+    font-family: 'Oswald', sans-serif;
+}
+
+.recipe-card:hover {
+    cursor: pointer;
+}
+
+.recipe-link {
+    text-decoration: none;
+}
+.recipe-card h4 {
+    font-size: 20px;
+}
+
+
+.edit-delete button {
+    display: flex;
+    font-family: 'Oswald', sans-serif;
+    background-color: #717744;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    flex-direction: row;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.edit-delete button:hover {
+    cursor: pointer;
+    background-color: #373d20;
+    color: #FEFEFE;
+}
+.edit-delete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+}

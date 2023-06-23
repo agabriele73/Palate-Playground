@@ -61,6 +61,10 @@
     box-shadow: 2px 2px 5px 2px #080808;
 }
 
+.recipe-image file-upload-button {
+    background-color: #373D20;
+}
+
 .submit-button button {
     background-color: #373D20;
     color: #FEFEFE;
@@ -133,4 +137,21 @@
 .form-item h6 {
     text-decoration: underline;
     font-size: 12px;
+}
+
+.file-upload {
+    display: flex;
+    padding: 10px;
+}
+
+.file-upload-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+}
+
+.file-upload-label:hover {
+    background-color: #373D20;
 }
