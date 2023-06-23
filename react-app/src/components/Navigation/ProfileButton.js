@@ -63,13 +63,13 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button onClick={myRecipes}>My Recipes</button>
             </li>
             <li>
               <button onClick={recipeFormRedirect}>Add a Recipe</button>
             </li>
             <li>
-              <button onClick={myRecipes}>My Recipes</button>
+              <button onClick={handleLogout}>Log Out</button>
             </li>
           </div>
         ) : (

@@ -1,0 +1,31 @@
+.edit-recipe-container {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Oswald', sans-serif;
+    padding: 20px;
+    background-color: #717744;
+    color: #FEFEFE;
+    overflow-y: scroll;
+}
+.edit-recipe-form-container {
+    display: block;
+    flex-direction: column;
+    padding: 20px;
+    align-items: left;
+    justify-content: left;
+}
+.edit-recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr auto);
+    grid-gap: 10px;
+}
+
+.edit-form-item {
+    display: block;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 1px solid #FEFEFE;
+}

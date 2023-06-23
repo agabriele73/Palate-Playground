@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as recipeActions from "../../store/recipe";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
+import './EditRecipe.css'
 
 
 
@@ -58,19 +59,28 @@ function EditRecipeForm({ recipeId }) {
     }
 
     return (
-        <div>
+        <div className="edit-recipe-container">
             <h1>
                 Edit Your Recipe?
             </h1>
             {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
             ))}
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+            <form onSubmit={handleSubmit} className="edit-recipe-grid">
+                <div className="edit-form-item">
+                <label>
+                    Title:
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    
+                </label>
+                </div>
+                <div className="edit-form-item">
+                <label>
+                    Protein Type:
                 <select
                         value={proteinType}
                         onChange={(e) => setProteinType(e.target.value)}
@@ -80,34 +90,62 @@ function EditRecipeForm({ recipeId }) {
                         <option value="seafood">Seafood</option>
                         <option value="vegetarian">Vegetarian</option>
                     </select>
-                <input
+                </label>
+                </div>
+                <div className="edit-form-item">
+                <label>
+                    Steps:
+                <textarea
                     type="text"
                     value={steps}
                     onChange={(e) => setSteps(e.target.value)}
                 />
-                <input
-                    type="text"
-                    value={ingredients}
-                    onChange={(e) => setIngredients(e.target.value)}
-                />
-                <input
-                    type="text"
-                    value={prepTime}
-                    onChange={(e) => setPrepTime(e.target.value)}
-                />
-                <input
-                    type="text"
-                    value={cookTime}
-                    onChange={(e) => setCookTime(e.target.value)}
-                />
+                </label>
+                </div>
+                <div className="edit-form-item">
+                    <label>
+                        Ingredients:
+                        <textarea
+                            type="text"
+                            value={ingredients}
+                            onChange={(e) => setIngredients(e.target.value)}
+                        />
+                    </label>
+                </div>
+                <div className="edit-form-item">
+                    <label>
+                        Cook Time:
+                    <input
+                        type="text"
+                        value={cookTime}
+                        onChange={(e) => setCookTime(e.target.value)}
+                    />
+                    </label>
+                    <label>
+                        Prep Time:
+                    <input
+                        type="text"
+                        value={prepTime}
+                        onChange={(e) => setPrepTime(e.target.value)}
+                    />
+                    </label>
+                </div>
+                <div className="edit-form-item">
+                <label>
+                    Steps Link:
                 <input
                     type="text"
                     value={stepsLink}
                     onChange={(e) => setStepsLink(e.target.value)}
                 />
-                <button type="submit">Submit</button>
+                </label>
+                </div>
+                <div className="submit-button">    
+                    <button type="submit">Submit</button>
+                    <button onClick={closeModal}>Cancel</button>
+                </div>
             </form>
-        </div>
+            </div>
     )
 }
 
