@@ -40,7 +40,7 @@ def seed_recipes():
     recipe3 = Recipe(
         owner_id=1,
         title='Macaroni and cheese',
-        protein_type=None,
+        protein_type='vegetarian',
         steps='In a large pot, bring milk to a boil. Reduce heat to medium-low, add macaroni, and cook, stirring frequently, for about 12 minutes or until the pasta is cooked. Remove from heat, add cheese, and stir until melted and incorporated. Serve and enjoy!',
         ingredients='4 cups (1 liter) Milk, 12oz (340g) Pasta (elbow macaroni), 7oz (200g) Cheddar cheese (shredded), 1 teaspoon Salt, 1/4 teaspoon Black pepper, 1/4 teaspoon Paprika',
         prep_time='20 minutes',

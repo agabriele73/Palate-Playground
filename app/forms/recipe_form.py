@@ -7,11 +7,10 @@ from app.models import Recipe
 class RecipeForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     protein_type = SelectField('protein_type', 
-                                choices=[('chicken', 'chicken'), 
-                                        ('beef', 'beef'), 
-                                        ('seafood', 'seafood'),
-                                        ('vegetarian', 'vegetarian'), 
-                                        ('none', 'none')], 
+                                choices=[('chicken', 'Chicken'), 
+                                        ('beef', 'Beef'), 
+                                        ('seafood', 'Seafood'),
+                                        ('vegetarian', 'Vegetarian')], 
                                         validators=[DataRequired()])
     steps = TextAreaField('steps', validators=[DataRequired()])
     ingredients = TextAreaField('ingredients', validators=[DataRequired()])

@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import * as recipeActions from "../../store/recipe";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import AWS from "aws-sdk";
 import './RecipeForm.css';
+
+AWS.config.update({
+    region: "us-west-1",
+    accessKeyId: 'AKIAVIOCGAKPTRIQ3WC4',
+    secretAccessKey: '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'
+})
 
 
 function RecipeFormPage() {
@@ -18,8 +25,23 @@ function RecipeFormPage() {
     const [recipeImage , setRecipeImage] = useState("");
     const [errors , setErrors] = useState([]);
     const history = useHistory();
+    let newImage
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const s3 = new AWS.S3();
+
+        const imageKey = `recipe-images/${Date.now()}-${recipeImage}`;
+        const s3Params = {
+            Bucket: "palateplaygroundbucket",
+            Key: imageKey,
+            Body: recipeImage,
+            ACL: "public-read",
+        };
+        try {
+        await s3.upload(s3Params).promise();
+
+        const imageUrl = `http://palateplaygroundbucket.s3-website-us-west-1.amazonaws.com/${imageKey}`;
         const newRecipe = {
             title: title,
             protein_type: proteinType,
@@ -30,8 +52,15 @@ function RecipeFormPage() {
             steps_link: stepsLink,
         }
         
-        const newImage = {
-            image_url: recipeImage,
+        if (imageUrl) {
+            setRecipeImage(imageUrl);
+            newImage = {
+            image_url: imageUrl,
+        }
+        } else {
+            newImage = {
+                image_url: recipeImage,
+            }
         }
         
         const createdRecipe = await dispatch(recipeActions.addRecipeThunk(newRecipe, newImage));
@@ -40,8 +69,10 @@ function RecipeFormPage() {
         if(createdRecipe && createdRecipe.errors) {
             setErrors(createdRecipe.errors);
         } else {
-            const addRecipe = await dispatch(recipeActions.addRecipeThunk(newRecipe, newImage));
             history.push(`/recipes/my-recipes`);
+        }
+        } catch (err) {
+            console.log(err);
         }
 
     }
@@ -136,10 +167,15 @@ function RecipeFormPage() {
                 <div className="recipe-image">
                 <label>
                     Recipe Image:
-                    <input
+                    {/* <input
                         type="text"
                         value={recipeImage}
                         onChange={(e) => setRecipeImage(e.target.value)}
+                    /> or: */}
+                    <input
+                        className="file-upload"
+                        type="file"
+                        onChange={(e) => setRecipeImage(e.target.files[0])}
                     />
                 </label>
                 </div>

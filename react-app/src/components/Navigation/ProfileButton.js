@@ -5,6 +5,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useModal } from "../../context/Modal";
 
 
 function ProfileButton({ user }) {
@@ -12,6 +13,7 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const history = useHistory();
+  const { closeModal } = useModal();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -42,6 +44,12 @@ function ProfileButton({ user }) {
 
   const recipeFormRedirect = () => {
     history.push("/recipes/new");
+    setShowMenu(false);
+  }
+
+  const myRecipes = () => {
+    history.push("/recipes/my-recipes");
+    setShowMenu(false);
   }
 
   return (
@@ -55,10 +63,13 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button onClick={myRecipes}>My Recipes</button>
             </li>
             <li>
               <button onClick={recipeFormRedirect}>Add a Recipe</button>
+            </li>
+            <li>
+              <button onClick={handleLogout}>Log Out</button>
             </li>
           </div>
         ) : (

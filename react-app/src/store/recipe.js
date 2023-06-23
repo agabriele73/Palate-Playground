@@ -2,6 +2,9 @@ const SET_RECIPES = "recipe/GET_ALL_RECIPES";
 const SET_CURRENT_RECIPE = "recipe/SET_CURRENT_RECIPE";
 const ADD_RECIPE = "recipe/ADD_RECIPE";
 const ADD_RECIPE_IMAGE = "recipe/ADD_RECIPE_IMAGE";
+const EDIT_RECIPE = "recipe/EDIT_RECIPE";
+const DELETE_RECIPE = "recipe/DELETE_RECIPE";
+
 
 
 const initialState = {
@@ -31,6 +34,16 @@ const addImage = (recipeId, image) => ({
         recipeId,
         image
     }
+})
+
+const deleteRecipe = (recipeId) => ({
+    type: DELETE_RECIPE,
+    payload: recipeId
+})
+
+const editRecipe = (recipe) => ({
+    type: EDIT_RECIPE,
+    payload: recipe
 })
 
 
@@ -100,6 +113,40 @@ export const fetchUsersRecipesThunk = () => async (dispatch) => {
     }
 }
 
+export const deleteRecipeThunk = (recipeId) => async (dispatch) => {
+    const response = await fetch(`/api/recipes/${recipeId}`, {
+        method: "DELETE",
+    });
+    if(response.ok) {
+        dispatch(deleteRecipe(recipeId));
+    }
+
+}
+
+export const editRecipeThunk = (recipe) => async (dispatch) => {
+    const response = await fetch(`/api/recipes/${recipe.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title: recipe.title,
+            protein_type: recipe.protein_type,
+            steps: recipe.steps,
+            ingredients: recipe.ingredients,
+            prep_time: recipe.prep_time,
+            cook_time: recipe.cook_time,
+            steps_link: recipe.steps_link
+        }),
+    });
+    if (response.ok) {
+        dispatch(editRecipe(recipe));
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
+
 export default function recipeReducer(state = initialState, action) {
     let normalizedRecipes = {};
     let newState= {...state};
@@ -118,6 +165,12 @@ export default function recipeReducer(state = initialState, action) {
             return newState;
         case ADD_RECIPE_IMAGE:
             newState.newImage = action.payload;
+            return newState;
+        case EDIT_RECIPE:
+            newState.currentRecipe = action.payload;
+            return newState;
+        case DELETE_RECIPE:
+            delete newState.recipes[action.payload];
             return newState;
         default:
             return state;
