@@ -249,32 +249,3 @@ def update_recipe_image(recipe_id, image_id):
 
 
 #POST COMMENT ROUTE
-@recipe_routes.route('/<int:recipe_id>/comments', methods=['POST'])
-@login_required
-def add_comment(recipe_id):
-    form = CommentForm()
-
-    form['csrf_token'].data = request.cookies['csrf_token']
-
-    recipe = Recipe.query.get(recipe_id)
-    
-    if not recipe:
-        return jsonify({'message': 'Recipe not found'}), 404
-    
-    if recipe.owner_id == current_user.id:
-        return jsonify({'message': 'Cannot comment on your own recipe'}), 401
-    
-    if form.validate_on_submit():
-
-        comment = Comment(
-            comment=form.data['comment'],
-            recipe_id=recipe_id,
-            user_id=current_user.id
-        )
-
-        db.session.add(comment)
-        db.session.commit()
-
-        return jsonify(comment.to_dict()), 200
-    
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
