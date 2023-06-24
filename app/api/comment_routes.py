@@ -19,9 +19,55 @@ def validation_errors_to_error_messages(validation_errors):
 @comment_routes.route('', methods=['GET'])
 def get_comments():
     comments = Comment.query.all()
-    return jsonify({"Comments": [comment.to_dict() for comment in comments]})
 
+    comments_data = []
+    for comment in comments:
+        user_posts = User.query.filter_by(id=comment.user_id).all()
+        user = [ user.username for user in user_posts]
 
+        comment_dict = {
+            'id': comment.id,
+            'user_id': comment.user_id,
+            'recipe_id': comment.recipe_id,
+            'comment': comment.comment,
+            'owner': user
+        }
+
+        comments_data.append(comment_dict)
+    
+    return jsonify(comments_data)
+
+@comment_routes.route('', methods=['POST', 'GET'])
+@login_required
+def add_comment():
+    form = CommentForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    comment_data = []
+    if form.validate_on_submit():
+
+        comment = Comment(
+            comment=form.data['comment'],
+            recipe_id=form.data['recipe_id'],
+            user_id=current_user.id
+        )
+        user = User.query.get(current_user.id)
+
+        db.session.add(comment)
+        db.session.commit()
+
+        comment_dict = {
+            'id': comment.id,
+            'user_id': comment.user_id,
+            'recipe_id': comment.recipe_id,
+            'comment': comment.comment,
+            'owner': user.username
+        }
+        comment_data.append(comment_dict)
+
+        return jsonify(comment_data[0]), 200
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 @comment_routes.route('/<int:comment_id>', methods=['GET'])
 def get_comment(comment_id):
     comment = Comment.query.get(comment_id)

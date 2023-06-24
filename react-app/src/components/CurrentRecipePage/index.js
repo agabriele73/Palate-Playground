@@ -83,7 +83,7 @@ function CurrentRecipePage() {
                 </div> */}
             </div>
             <div>
-                <RecipeCommentsComponent />
+                <RecipeCommentsComponent recipeId={currentRecipe.id}/>
             </div>
         </div>
     ) : (
