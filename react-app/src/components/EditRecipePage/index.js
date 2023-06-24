@@ -18,7 +18,7 @@ function EditRecipeForm({ recipeId }) {
     const [recipeImage , setRecipeImage] = useState("");
     const [errors , setErrors] = useState([]);
     const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
-    const currImage = useSelector((state) => state.recipe.recipeImage[0]);
+    const currImage = useSelector((state) => state.recipe.recipeImage);
     const { closeModal } = useModal();
 
     useEffect(() => {
