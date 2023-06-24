@@ -12,7 +12,7 @@ def seed_recipes():
         ingredients='test ingredients, ingredient, ingredient, ingredient, ingredient',
         prep_time='test prep time',
         cook_time='test cook time',
-        steps_link='test steps link'
+        steps_link='https://www.youtube.com/embed/dKPFcfXj8I4'
     )
 
     recipe1 = Recipe(

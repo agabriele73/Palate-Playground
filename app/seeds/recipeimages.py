@@ -6,7 +6,7 @@ from sqlalchemy.sql import text
 def seed_recipeimages():
     recipeimage1 = RecipeImage(
         recipe_id=1,
-        image_url='image.url'
+        image_url='https://i.imgur.com/tw3WrtL.png'
     )
     recipeimage2 = RecipeImage(
         recipe_id=2,

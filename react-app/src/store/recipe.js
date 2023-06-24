@@ -1,8 +1,10 @@
 const SET_RECIPES = "recipe/GET_ALL_RECIPES";
 const SET_CURRENT_RECIPE = "recipe/SET_CURRENT_RECIPE";
+const SET_RECIPE_IMAGE = "recipe/SET_RECIPE_IMAGE";
 const ADD_RECIPE = "recipe/ADD_RECIPE";
 const ADD_RECIPE_IMAGE = "recipe/ADD_RECIPE_IMAGE";
 const EDIT_RECIPE = "recipe/EDIT_RECIPE";
+const EDIT_RECIPE_IMAGW = "recipe/EDIT_RECIPE_IMAGE";
 const DELETE_RECIPE = "recipe/DELETE_RECIPE";
 
 
@@ -11,7 +13,7 @@ const initialState = {
     recipes: [],
     currentRecipe: null,
     newRecipe: null,
-    newImage: null
+    recipeImage: null
 }
 const setRecipes = (recipes) => ({
     type: SET_RECIPES,
@@ -46,12 +48,33 @@ const editRecipe = (recipe) => ({
     payload: recipe
 })
 
+const editImage = (recipeId, image) => ({
+    type: EDIT_RECIPE_IMAGW,
+    payload: {
+        recipeId,
+        image
+    }
+})
+
+const setRecipeImage = (image) => ({
+    type: SET_RECIPE_IMAGE,
+    payload: image
+})
+
 
 export const fetchRecipesThunk = () => async (dispatch) => {
     const response = await fetch("/api/recipes");
     if (response.ok) {
         const data = await response.json();
         dispatch(setRecipes(data));
+    }
+}
+
+export const fetchRecipeImageThunk = (recipeId) => async (dispatch) => {
+    const response = await fetch(`/api/recipes/${recipeId}/images`);
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setRecipeImage(data));
     }
 }
 
@@ -123,27 +146,46 @@ export const deleteRecipeThunk = (recipeId) => async (dispatch) => {
 
 }
 
-export const editRecipeThunk = (recipe) => async (dispatch) => {
-    const response = await fetch(`/api/recipes/${recipe.id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            title: recipe.title,
-            protein_type: recipe.protein_type,
-            steps: recipe.steps,
-            ingredients: recipe.ingredients,
-            prep_time: recipe.prep_time,
-            cook_time: recipe.cook_time,
-            steps_link: recipe.steps_link
-        }),
-    });
-    if (response.ok) {
-        dispatch(editRecipe(recipe));
-    } else {
-        const data = await response.json();
-        return data;
+export const editRecipeThunk = (recipe, image) => async (dispatch) => {
+    console.log(recipe, image)
+    try {
+        const response = await fetch(`/api/recipes/${recipe.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(recipe),
+        })
+
+        if (!response.ok) {
+            const data = await response.json();
+            return data
+        }
+
+        const recipeData = await response.json();
+        console.log(recipeData)
+        const recipeId = recipeData.id
+
+        const imageResponse = await fetch(`/api/recipes/${recipeId}/images/${image.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(image),
+        })
+
+        if (!imageResponse.ok) {
+            const data = await imageResponse.json();
+            return data
+        }
+
+        const imageData = await imageResponse.json();
+
+        dispatch(editRecipe(recipeData))
+        dispatch(editImage(recipeId, imageData))
+
+    } catch (error) {
+        console.error(error);
     }
 }
 
@@ -163,8 +205,11 @@ export default function recipeReducer(state = initialState, action) {
         case ADD_RECIPE:
             newState.newRecipe = action.payload;
             return newState;
+        case SET_RECIPE_IMAGE:
+            newState.recipeImage = action.payload;
+            return newState;
         case ADD_RECIPE_IMAGE:
-            newState.newImage = action.payload;
+            newState.recipeImage = action.payload;
             return newState;
         case EDIT_RECIPE:
             newState.currentRecipe = action.payload;

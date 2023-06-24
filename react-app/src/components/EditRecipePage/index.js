@@ -15,12 +15,15 @@ function EditRecipeForm({ recipeId }) {
     const [prepTime, setPrepTime] = useState("");
     const [cookTime, setCookTime] = useState("");
     const [stepsLink, setStepsLink] = useState("");
+    const [recipeImage , setRecipeImage] = useState("");
     const [errors , setErrors] = useState([]);
     const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
+    const currImage = useSelector((state) => state.recipe.recipeImage[0]);
     const { closeModal } = useModal();
 
     useEffect(() => {
         dispatch(recipeActions.setCurrentRecipeThunk(recipeId));
+        dispatch(recipeActions.fetchRecipeImageThunk(recipeId));
     }, [dispatch, recipeId]);
 
     useEffect(() => {
@@ -32,9 +35,10 @@ function EditRecipeForm({ recipeId }) {
         setPrepTime(currentRecipe.prep_time);
         setCookTime(currentRecipe.cook_time);
         setStepsLink(currentRecipe.steps_link);
+        setRecipeImage(currentRecipe.images);
         }
     }, [currentRecipe]);
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updateRecipe = {
@@ -47,10 +51,16 @@ function EditRecipeForm({ recipeId }) {
             cook_time: cookTime,
             steps_link: stepsLink,
         }
+        
+        const updatedImage = {
+            id: currImage.id,
+            image_url: recipeImage
+        }
 
-        const data = await dispatch(recipeActions.editRecipeThunk(updateRecipe));
-        if (data) {
+        const data = await dispatch(recipeActions.editRecipeThunk(updateRecipe, updatedImage));
+        if (data && data.errors) {
             setErrors(data.errors);
+            console.log('-----data in edit recipe component', data)
         } else {
             dispatch(recipeActions.fetchUsersRecipesThunk());
             closeModal();
@@ -140,7 +150,17 @@ function EditRecipeForm({ recipeId }) {
                 />
                 </label>
                 </div>
-                <div className="submit-button">    
+                <div className="edit-image">
+                    <label>
+                        Image:
+                    <input
+                        type="text"
+                        value={recipeImage}
+                        onChange={(e) => setRecipeImage(e.target.value)}
+                    />
+                    </label>
+                </div>
+                <div className="edit-submit-button">    
                     <button type="submit">Submit</button>
                     <button onClick={closeModal}>Cancel</button>
                 </div>

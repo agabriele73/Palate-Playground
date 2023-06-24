@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_required
-from app.forms import RecipeForm, RecipeImageForm
-from app.models import Recipe, RecipeImage, User, db
+from app.forms import RecipeForm, RecipeImageForm, CommentForm
+from app.models import Recipe, RecipeImage, User, Comment, db
 
 recipe_routes = Blueprint('recipes', __name__)
 def validation_errors_to_error_messages(validation_errors):
@@ -73,6 +73,14 @@ def get_my_recipes():
         recipe_data.append(recipe_dict)
     return jsonify({"Recipes": recipe_data})
 
+@recipe_routes.route('/<int:recipe_id>/images', methods=['GET'])
+@login_required
+def get_images_byrecipeId(recipe_id):
+    recipe = Recipe.query.get(recipe_id)
+    recipe_images = RecipeImage.query.filter_by(recipe_id=recipe.id).all()
+    image_urls = [ image.to_dict() for image in recipe_images]
+
+    return jsonify(image_urls)
 
 @recipe_routes.route('/<int:recipe_id>', methods=['GET'])
 def get_recipe_byId(recipe_id):
@@ -235,5 +243,38 @@ def update_recipe_image(recipe_id, image_id):
         db.session.commit()
 
         return jsonify(image.to_dict())
+    
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+
+#POST COMMENT ROUTE
+@recipe_routes.route('/<int:recipe_id>/comments', methods=['POST'])
+@login_required
+def add_comment(recipe_id):
+    form = CommentForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    recipe = Recipe.query.get(recipe_id)
+    
+    if not recipe:
+        return jsonify({'message': 'Recipe not found'}), 404
+    
+    if recipe.owner_id == current_user.id:
+        return jsonify({'message': 'Cannot comment on your own recipe'}), 401
+    
+    if form.validate_on_submit():
+
+        comment = Comment(
+            comment=form.data['comment'],
+            recipe_id=recipe_id,
+            user_id=current_user.id
+        )
+
+        db.session.add(comment)
+        db.session.commit()
+
+        return jsonify(comment.to_dict()), 200
     
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
