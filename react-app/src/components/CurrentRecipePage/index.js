@@ -3,6 +3,7 @@ import * as recipeActions from "../../store/recipe";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./CurrRecipe.css"
+import RecipeCommentsComponent from "../CommentsComponent";
 
 
 
@@ -53,7 +54,7 @@ function CurrentRecipePage() {
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-            ></iframe>
+                ></iframe>
             </div>
                 <div className="recipe-steps">
                 <div className="recipe-times">
@@ -80,6 +81,9 @@ function CurrentRecipePage() {
                     <i className="fa-brands fa-youtube" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
                     <i className="fa-brands fa-twitch" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
                 </div> */}
+            </div>
+            <div>
+                <RecipeCommentsComponent />
             </div>
         </div>
     ) : (
