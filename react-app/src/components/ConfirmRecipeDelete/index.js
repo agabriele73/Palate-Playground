@@ -27,7 +27,7 @@ function ConfirmRecipeDelete({ recipeId }) {
             <button onClick={handleDeleteConfirmation}>
                 Yes
             </button>
-            <button>
+            <button onClick={closeModal}>
                 No
             </button>
         </div>

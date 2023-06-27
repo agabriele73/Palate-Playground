@@ -38,6 +38,8 @@ function CurrentRecipePage() {
     // }
 
     return currentRecipe && currentRecipe.steps_link ? (
+        <>
+
         <div className="currentrecipe-container">
             <h1 className="recipe-title">{currentRecipe.title}</h1>
             <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
@@ -82,10 +84,9 @@ function CurrentRecipePage() {
                     <i className="fa-brands fa-twitch" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
                 </div> */}
             </div>
-            <div>
-                <RecipeCommentsComponent recipeId={currentRecipe.id}/>
-            </div>
         </div>
+            <RecipeCommentsComponent recipeId={currentRecipe.id}/>
+        </>
     ) : (
         <h1>Loading...</h1>
     )
