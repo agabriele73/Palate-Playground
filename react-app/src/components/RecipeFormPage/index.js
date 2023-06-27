@@ -77,6 +77,13 @@ function RecipeFormPage() {
 
     }
 
+    const handleDisabled = () => {
+        if (title === "" || proteinType === "" || steps === "" || ingredients === "" || prepTime === "" || cookTime === "" || stepsLink === "") {
+            return true;
+        }
+
+    }
+
     return user && (
         <div className="recipe-form">
             <h1>
@@ -104,6 +111,7 @@ function RecipeFormPage() {
                         value={proteinType}
                         onChange={(e) => setProteinType(e.target.value)}
                     >
+                        <option value="" disabled>Please make a selection...</option>
                         <option value="chicken">Chicken</option>
                         <option value="beef">Beef</option>
                         <option value="seafood">Seafood</option>
@@ -181,7 +189,7 @@ function RecipeFormPage() {
                 </div>
                 <br/>
                 <div className="submit-button">
-                <button tyope="submit">Submit Your Recipe</button>
+                <button type="submit" disabled={handleDisabled()}>Submit Your Recipe</button>
                 </div>
             </form>
 

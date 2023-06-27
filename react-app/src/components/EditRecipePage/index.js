@@ -94,6 +94,7 @@ function EditRecipeForm({ recipeId }) {
                 <select
                         value={proteinType}
                         onChange={(e) => setProteinType(e.target.value)}
+                        defaultValue={proteinType}
                     >
                         <option value="chicken">Chicken</option>
                         <option value="beef">Beef</option>

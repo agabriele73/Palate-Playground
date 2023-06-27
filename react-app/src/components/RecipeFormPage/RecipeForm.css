@@ -80,6 +80,12 @@
     background-color: #717744;
     transform: scale(1.1);
 }
+
+.submit-button button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
 .form-item {
     display: block;
     width: 100%;
