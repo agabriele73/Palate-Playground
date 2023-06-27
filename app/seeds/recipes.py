@@ -7,7 +7,7 @@ def seed_recipes():
     demo = Recipe(
         owner_id=1,
         title='test title',
-        protein_type='test protein',
+        protein_type='chicken',
         steps='test steps',
         ingredients='test ingredients, ingredient, ingredient, ingredient, ingredient',
         prep_time='test prep time',
