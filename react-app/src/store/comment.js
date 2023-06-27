@@ -1,5 +1,7 @@
 const SET_COMMENTS = "comment/SET_COMMENTS";
 const POST_COMMENT = "comment/POST_COMMENT";
+const UPDATE_COMMENT = "comment/UPDATE_COMMENT";
+const DELETE_COMMENT = "comment/DELETE_COMMENT";
 
 
 const initialState = {
@@ -14,6 +16,16 @@ const setComments = (comments) => ({
 
 const postComment = (comment) => ({
     type: POST_COMMENT,
+    payload: comment
+})
+
+const deleteComment = (commentId) => ({
+    type: DELETE_COMMENT,
+    payload: commentId
+})
+
+const updateComment = (comment) => ({
+    type: UPDATE_COMMENT,
     payload: comment
 })
 
@@ -43,6 +55,33 @@ export const postCommentThunk = (comment) => async (dispatch) => {
     }
 }
 
+export const updateCommentThunk = (comment) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${comment.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+    })
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(updateComment(data));
+    }
+}
+
+export const deleteCommentThunk = (commentId) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(deleteComment(data));
+    }
+}
+
 
 export default function commentReducer(state = initialState, action) {
     let normalizedRecipes = {};
@@ -56,6 +95,12 @@ export default function commentReducer(state = initialState, action) {
             return newState;
         case POST_COMMENT:
             newState.comments[action.payload.id] = action.payload;
+            return newState;
+        case UPDATE_COMMENT:
+            newState.comments[action.payload.id] = action.payload;
+            return newState;
+        case DELETE_COMMENT:
+            delete newState.comments[action.payload];
             return newState;
         default:
             return state;
