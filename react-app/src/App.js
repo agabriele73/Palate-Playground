@@ -5,6 +5,7 @@ import RecipeHomePage from "./components/RecipeHomePage";
 import CurrentRecipePage from "./components/CurrentRecipePage";
 import RecipeFormPage from "./components/RecipeFormPage";
 import UsersRecipesPage from "./components/UsersRecipes";
+import AllRecipesPage from "./components/AllRecipesPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route exact path="/recipes/my-recipes">
             <UsersRecipesPage />
+          </Route>
+          <Route exact path="/recipes">
+            <AllRecipesPage />
           </Route>
           <Route exact path="/recipes/:recipe_id">
             <CurrentRecipePage />

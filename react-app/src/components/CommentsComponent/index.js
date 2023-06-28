@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import * as recipeActions from "../../store/recipe";
 import * as commentActions from "../../store/comment";
-import { useParams } from "react-router-dom";
 import  OpenModalButton  from "../OpenModalButton";
 import CommentFormComponent from "../CommentFormComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
-import CommDeleteEditModal from "../CommEditDeleteModal";
+import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import ConfirmCommentDelete from "../ConfirmCommentDelete";
+import './Comments.css'
 
 function RecipeCommentsComponent({ recipeId }) {
     const dispatch = useDispatch();
@@ -67,13 +65,44 @@ function RecipeCommentsComponent({ recipeId }) {
     };
 
     return (
-        <div>
+        <div className="comments-container">
             <h2>Comments</h2>
+            <div className="add-comment">
             {currUser && addCommentButton()}
+            </div>
             {showCommentForm && <CommentFormComponent setShowCommentForm={setShowCommentForm} />}
+            <div className="comments">
             {filteredComments.map((comment) => (
-                <div key={comment.id}>
-                    <h5>{comment.owner}</h5>
+                <div key={comment.id} className="comment">
+                    <div className="comment-owner">
+                    <h5>comment by: {comment.owner}</h5>
+                    </div>
+                    {currUser && currUser.id === comment.user_id && (
+                        <div>
+                            {selectedCommentId === comment.id && (
+                                <div className="edit-delete-comment">
+                                    <OpenModalButton
+                                        buttonText={<FontAwesomeIcon icon={faTrash} />}
+                                        modalComponent={
+                                            <ConfirmCommentDelete commentId={comment.id} setSelectedCommentId={setSelectedCommentId} />
+                                        }
+                                    />
+                                    <OpenModalButton
+                                        buttonText={<FontAwesomeIcon icon={faEdit} />}
+                                        onButtonClick={() => handleOpenEditComment(comment.id)}
+                                    />
+                                </div>
+                            )}
+                            <div className="comment-options">
+                            <button
+                                className="fas fa-ellipsis-h"
+                                onClick={() =>
+                                    setSelectedCommentId(selectedCommentId === comment.id ? null : comment.id)
+                                }
+                            />
+                            </div>
+                        </div>
+                    )}
                     {commentStates[comment.id] ? (
                         <>
                         <form onSubmit={(e) => handleSaveEdit(comment.id)}>
@@ -88,32 +117,9 @@ function RecipeCommentsComponent({ recipeId }) {
                     ) : (
                         <p>{comment.comment}</p>
                     )}
-                    {currUser && currUser.id === comment.user_id && (
-                        <div>
-                            <button
-                                className="fas fa-ellipsis-h"
-                                onClick={() =>
-                                    setSelectedCommentId(selectedCommentId === comment.id ? null : comment.id)
-                                }
-                            />
-                            {selectedCommentId === comment.id && (
-                                <div>
-                                    <OpenModalButton
-                                        buttonText={<FontAwesomeIcon icon={faTrash} />}
-                                        modalComponent={
-                                            <ConfirmCommentDelete commentId={comment.id} setSelectedCommentId={setSelectedCommentId} />
-                                        }
-                                    />
-                                    <OpenModalButton
-                                        buttonText={<FontAwesomeIcon icon={faEdit} />}
-                                        onButtonClick={() => handleOpenEditComment(comment.id)}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    )}
                 </div>
             ))}
+            </div>
         </div>
     );
 }

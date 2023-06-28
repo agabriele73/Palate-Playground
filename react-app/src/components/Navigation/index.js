@@ -28,7 +28,7 @@ function Navigation({ isLoaded }){
 			<NavLink to="/recipes/chicken">Chicken</NavLink>
 			<NavLink to="/recipes/beef">Beef</NavLink>
 			<NavLink to="/recipes/seafood">Seafood</NavLink>
-			<NavLink to="/recipes/meat-less">Meat-less</NavLink>
+			<NavLink to="/recipes/vegetarian">Vegetarian</NavLink>
 		</nav>
 		</div>
 	);

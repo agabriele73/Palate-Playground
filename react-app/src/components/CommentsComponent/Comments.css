@@ -1,0 +1,105 @@
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    font-family: "Oswald", sans-serif;
+}
+
+.comments-container h2 {
+    font-size: 50px;
+    padding: 10px;
+    text-decoration: underline;
+    font-family: 'Oswald', sans-serif;
+}
+
+.comment {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex-direction: column;
+    align-items: left;
+    font-family: 'Oswald', sans-serif;
+    margin: 20px;
+    padding: 10px;
+    border: 2px solid #373d20;
+}
+
+.comment-owner {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.comment h5 {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    text-decoration: underline 1px;
+}
+
+.comment p {
+    grid-column: span 2;
+    font-size: 18px;
+}
+
+.comment-options button {
+    background: transparent;
+    border: none;
+    color: #FEFEFE;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.comment-options {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.comment-options button:hover {
+    cursor: pointer;
+    transform: perspective(1px) scale(1.1);
+    border: none;
+}
+
+.comments textarea {
+    grid-column: span 2;
+    font-size: 18px;
+    padding: 5px;
+    width: 600px;
+    height: 80px;
+}
+.edit-delete-comment {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.edit-delete-comment button {
+    color: #FEFEFE;
+    border: 1px solid #FEFEFE;
+    background: transparent;
+    border-radius: 2px;
+    margin: 2px;
+}
+
+.edit-delete-comment button:hover {
+    cursor: pointer;
+    background: transparent;
+    box-shadow: 2px 2px 5px 2px #080808;
+    transform: perspective(1px) scale(1.1);
+}
+
+.add-comment button {
+    display: flex;
+    margin: 20px;
+    padding: 5px;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    border: 1px solid #080808;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 2px #080808;
+    background-color: #717731;
+    width: 150px;
+    cursor: pointer;
+}
