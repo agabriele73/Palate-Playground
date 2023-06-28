@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as commentActions from "../../store/comment";
+import './CommentForm.css';
 
 function CommentFormComponent({ setShowCommentForm }) {
     const [comment, setComment] = useState("");
@@ -30,19 +31,27 @@ function CommentFormComponent({ setShowCommentForm }) {
         }
     };
 
+    const handleDisabled = () => {
+        if (comment === "") {
+            return true;
+        }
+    }
+
     return (
-        <div>
+        <div className="comment-form-container">
             <h5>Post your comment and let us know what you think!</h5>
             <form onSubmit={handleSubmit}>
             {errors.map((error, idx) => (
                 <p key={idx}>{error}</p>
             ))}
-                <input
+                <textarea
                     type="text"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                 />
-                <button type="submit">Submit</button>
+                <div className="comment-button-container">
+                    <button type="submit" disabled={handleDisabled()}>Submit</button>
+                </div>
             </form>
         </div>
     );
