@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -6,6 +6,12 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
+	const recipes = useSelector(state => state.recipe.recipes);
+	const [searchQuery, setSearchQuery] = useState('');
+
+	const filteredRecipes = Object.values(recipes).filter(recipe =>
+		recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
+	);
 
 	return (
 		<div>
@@ -24,6 +30,13 @@ function Navigation({ isLoaded }){
 			)}
 		</ol>
 		<nav className="nav-bar">
+			{/* <input 
+				type="text"
+				placeholder="Search..."
+				value={searchQuery}
+				onChange={(e) => setSearchQuery(e.target.value)}
+				className="search-bar"
+			/> */}
 			<NavLink to="/recipes">Recipes</NavLink>
 			<NavLink to="/recipes/chicken">Chicken</NavLink>
 			<NavLink to="/recipes/beef">Beef</NavLink>

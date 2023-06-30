@@ -8,6 +8,7 @@
   z-index: 1000;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
 }
 
 #modal-background {
@@ -23,4 +24,5 @@
   position: absolute;
   background-color:white;
   overflow: auto;
+  border-radius: 4px;
 }

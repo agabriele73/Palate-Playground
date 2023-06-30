@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import * as recipeActions from "../../store/recipe";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from '../../context/Modal';
-
+import './ConfirmDeleteRecipe.css';
 function ConfirmRecipeDelete({ recipeId }) {
     const dispatch = useDispatch();
     const recipeToDelete = useSelector((state) => state.recipe.currentRecipe);
@@ -20,16 +20,19 @@ function ConfirmRecipeDelete({ recipeId }) {
     }
 
     return (
-        <div>
+        <div className="confirm-delete">
             <h1>
                 Are you sure you want to delete this recipe?
             </h1>
+            <br/>
+            <div>
             <button onClick={handleDeleteConfirmation}>
                 Yes
             </button>
             <button onClick={closeModal}>
                 No
             </button>
+            </div>
         </div>
     )
 }
