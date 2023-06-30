@@ -17,7 +17,7 @@ function ConfirmCommentDelete( { commentId, setSelectedCommentId }) {
         closeModal();
     }
     return (
-        <>
+        <div className="confirm-delete">
             <h1>
                 Are you sure you want to delete this comment?    
             </h1>
@@ -27,7 +27,7 @@ function ConfirmCommentDelete( { commentId, setSelectedCommentId }) {
             <button onClick={closeModal}>
                 Cancel    
             </button>      
-        </>
+        </div>
     );
 }
 

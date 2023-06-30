@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as commentActions from "../../store/comment";
 import './CommentForm.css';
@@ -37,6 +37,25 @@ function CommentFormComponent({ setShowCommentForm }) {
         }
     }
 
+    const handleCancel = () => {
+        setShowCommentForm(false);
+    }
+
+    useEffect(() => {
+        const handleKeyPress = (e) => {
+            if (e.key === "Escape") {
+                setShowCommentForm(false);
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyPress);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyPress);
+        };
+    }, [setShowCommentForm]);
+
+
     return (
         <div className="comment-form-container">
             <h5>Post your comment and let us know what you think!</h5>
@@ -51,6 +70,7 @@ function CommentFormComponent({ setShowCommentForm }) {
                 />
                 <div className="comment-button-container">
                     <button type="submit" disabled={handleDisabled()}>Submit</button>
+                    <button onClick={handleCancel}>Cancel</button>
                 </div>
             </form>
         </div>

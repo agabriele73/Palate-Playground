@@ -51,7 +51,7 @@
     .currentrecipe-container {
         width: 100%;
         height: 100%;
-        margin: 15px;
+        margin: 0 auto;
         flex-direction: column;
         font-family: 'Oswald', sans-serif;
     }

@@ -16,7 +16,7 @@ function RecipeHomePage() {
         dispatch(recipeActions.fetchRecipesThunk());
     }, [dispatch]);
 
-    if (recipesArr.length > 5) {
+    if (recipesArr.length >= 4) {
         const randomIndex = Math.floor(Math.random() * recipesArr.length);
         slicedRecipes = recipesArr.slice(randomIndex, randomIndex + 3);
     } else {
