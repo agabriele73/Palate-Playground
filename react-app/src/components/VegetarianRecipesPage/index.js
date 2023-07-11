@@ -18,7 +18,7 @@ function VegetarianRecipesPage() {
 
     return (
         <div>
-            <h1>Chicken Recipes</h1>
+            <h1>Vegetarian Recipes</h1>
             <div className="recipe-grid">
             {vegetarianRecipes.map((recipe) => (
                 <div key={recipe.id} className="recipe-card">
