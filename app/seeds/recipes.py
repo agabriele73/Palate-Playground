@@ -48,6 +48,17 @@ def seed_recipes():
         steps_link="https://www.youtube.com/embed/IzLn0pXntNE"
     )
 
+    recipe4 = Recipe(
+        owner_id=2,
+        title='Easy Lemon Butter Fish',
+        protein_type='seafood',
+        steps= "Pat-dry fish fillets with paper towels. This is crucial for browning instead of steaming. Set aside. In a bowl, combine melted butter, lemon juice and zest, 1/2 tsp kosher salt. Stir well. Add more salt if desired. In a separate bowl, combine remaining 1/2 tsp kosher salt, paprika, garlic powder, onion powder, black pepper. Press spice mixture onto fish fillets. Heat olive oil in a large pan over medium-high heat. Cook 2 fillets at a time to avoid overcrowding. Cook until fish is opaque, firm in center, and browned, 2-3 minutes per side. Drizzle lemon butter sauce while cooking, save rest for serving. Don't overcook for a tender texture. Season with salt and pepper. Serve with remaining sauce, basil or parsley, lemon wedges.",
+        ingredients= '4 firm white fish fillets (about 6 inches long & 1-inch thickness throughout), 3 TB melted butter, Juice and zest from 1 medium lemon, ½ tsp kosher salt (plus extra to taste), 1 tsp paprika, 1 tsp garlic powder, 1 tsp onion powder, ¼ tsp freshly ground black pepper, 3 TbSp olive oil, freshly chopped basil or parsley leaves (for garnish and flavor), extra lemon slices (for serving)',
+        prep_time='10 minutes',
+        cook_time='15 minutes',
+        steps_link="https://www.youtube.com/embed/fFgaUq_mdMI"
+    )
+
 
 
 
@@ -56,6 +67,7 @@ def seed_recipes():
     db.session.add(recipe1)
     db.session.add(recipe2)
     db.session.add(recipe3)
+    db.session.add(recipe4)
     db.session.commit()
 
 

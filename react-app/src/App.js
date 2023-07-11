@@ -6,6 +6,10 @@ import CurrentRecipePage from "./components/CurrentRecipePage";
 import RecipeFormPage from "./components/RecipeFormPage";
 import UsersRecipesPage from "./components/UsersRecipes";
 import AllRecipesPage from "./components/AllRecipesPage";
+import ChickenRecipesPage from "./components/ChickenRecipesPage";
+import BeefRecipesPage from "./components/BeefRecipesPage";
+import SeafoodRecipesPage from "./components/SeafoodRecipesPage";
+import VegetarianRecipesPage from "./components/VegetarianRecipesPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -32,6 +36,18 @@ function App() {
           </Route>
           <Route exact path="/recipes">
             <AllRecipesPage />
+          </Route>
+          <Route exact path="/recipes/chicken"> 
+            <ChickenRecipesPage />
+          </Route>
+          <Route exact path="/recipes/beef">
+            <BeefRecipesPage />
+          </Route>
+          <Route exact path="/recipes/seafood">
+            <SeafoodRecipesPage />
+          </Route>
+          <Route exact path="/recipes/vegetarian">
+            <VegetarianRecipesPage />
           </Route>
           <Route exact path="/recipes/:recipe_id">
             <CurrentRecipePage />
