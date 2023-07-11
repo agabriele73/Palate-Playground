@@ -20,11 +20,16 @@ def seed_recipeimages():
         recipe_id=4,
         image_url='https://i.imgur.com/Tpuy1Eq.jpg'
     )
+    recipeimage5 = RecipeImage(
+        recipe_id=5,
+        image_url='https://i.imgur.com/HSKWnPX.jpg'
+    )
 
     db.session.add(recipeimage1)
     db.session.add(recipeimage2)
     db.session.add(recipeimage3)
     db.session.add(recipeimage4)
+    db.session.add(recipeimage5)
     db.session.commit()
 
 def undo_recipeimages():
