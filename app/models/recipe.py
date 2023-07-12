@@ -21,6 +21,7 @@ class Recipe(db.Model):
     owned_recipe = db.relationship('User', back_populates='recipe_owner')
     comments_on_recipe = db.relationship('Comment', back_populates='recipe_comment')
     recipe_w_images = db.relationship('RecipeImage', back_populates='recipe_imgs')
+    recipe_favorites = db.relationship('Favorite', back_populates='favorites_recipe')
 
     # @db.validates('steps_link')
     # def validate_steps_link(self, key, steps_link):

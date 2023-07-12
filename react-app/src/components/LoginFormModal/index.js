@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { GoogleLogin } from "react-google-login";
 import "./LoginForm.css";
+
+const clientId = '689349869162-9k0cu2evj319324dp3bnk5j7dolt5gei.apps.googleusercontent.com'
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -31,7 +34,16 @@ function LoginFormModal() {
     } else {
         closeModal()
     }
+
   };
+
+  const onSuccess = (res) => {
+    console.log("login success", res.ProfileObj);
+  }
+
+  const onFailure = (res) => {
+    console.log("login failure", res);
+  }
   
   // const handleGoogleSignIn = () => {
   //   window.gapi.auth2
@@ -84,6 +96,16 @@ function LoginFormModal() {
         <button type="submit">Log In</button>
       </form>
         {/* <div class="g-signin2" data-onsuccess="handleGoogleSignIn"><button onClick={handleGoogleSignIn}>Sign In with Google</button></div> */}
+        <div>
+          <GoogleLogin
+            clientId={clientId}
+            buttonText="Log In with Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={'single_host_origin'}
+            isSignedIn={true}
+          />
+        </div>
     </ div>
   );
 }
