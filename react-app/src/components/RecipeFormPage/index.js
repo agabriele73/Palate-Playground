@@ -32,8 +32,6 @@ function RecipeFormPage() {
     let newImage
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("awsSecretAccessKey", awsSecretAccessKey);
-        console.log("awsAccessKey", awsAccessKey);
 
         const s3 = new AWS.S3();
 
