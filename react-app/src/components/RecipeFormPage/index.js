@@ -3,15 +3,16 @@ import * as recipeActions from "../../store/recipe";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import AWS from "aws-sdk";
+import config from "../../config";
 import './RecipeForm.css';
 
 
-const awsAccessKey = process.env.REACT_APP_AWS_ACCESS_KEY
-const awsSecretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
+// const awsAccessKey = process.env.REACT_APP_AWS_ACCESS_KEY
+// const awsSecretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
 
 AWS.config.update({
-    accessKeyId: awsAccessKey,
-    secretAccessKey: awsSecretAccessKey,
+    accessKeyId: config.awsAccessKey,
+    secretAccessKey: config.awsSecretAccessKey,
     region: "us-west-1"
 })
 
