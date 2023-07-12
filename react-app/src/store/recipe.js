@@ -182,7 +182,7 @@ export const editRecipeThunk = (recipe, image) => async (dispatch) => {
         const imageData = await imageResponse.json();
 
         dispatch(editRecipe(recipeData))
-        dispatch(editImage(recipeId, imageData))
+        dispatch(editImage(recipeId, imageData.image_url))
 
     } catch (error) {
         console.error(error);
