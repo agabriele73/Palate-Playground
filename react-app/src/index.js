@@ -8,7 +8,6 @@ import * as sessionActions from "./store/session";
 import * as recipeActions from "./store/recipe";
 import * as commentActions from "./store/comment";
 import App from "./App";
-
 import "./index.css";
 
 const store = configureStore();
