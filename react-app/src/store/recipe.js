@@ -122,7 +122,7 @@ export const addRecipeThunk = (recipe, image) => async (dispatch) => {
 
         dispatch(addRecipe(recipeData))
 
-        dispatch(addImage(recipeId, imageData))
+        dispatch(addImage(recipeId, imageData.image_url))
     } catch (error) {
         console.error(error);
     }
