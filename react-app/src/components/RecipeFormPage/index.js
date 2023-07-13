@@ -41,7 +41,7 @@ function RecipeFormPage() {
             Bucket: "palateplaygroundbucket2",
             Key: imageKey,
             Body: recipeImage,
-            // ACL: "public-read",
+            ACL: "public-read",
         };
         try {
         await s3.upload(s3Params).promise();
@@ -83,7 +83,7 @@ function RecipeFormPage() {
     }
 
     const handleDisabled = () => {
-        if (title === "" || proteinType === "" || steps === "" || ingredients === "" || prepTime === "" || cookTime === "" || stepsLink === "") {
+        if (title === "" || proteinType === "" || steps === "" || ingredients === "" || prepTime === "" || cookTime === "" || stepsLink === "" || recipeImage === "") {
             return true;
         }
 
