@@ -36,12 +36,13 @@ function RecipeFormPage() {
 
         const s3 = new AWS.S3();
 
-        const imageKey = `recipe-images/${Date.now()}-${recipeImage}`;
+        const imageKey = `recipe-images/${Date.now()}-${recipeImage.name}`;
         const s3Params = {
             Bucket: "palateplaygroundbucket2",
             Key: imageKey,
             Body: recipeImage,
             ACL: "public-read",
+            ContentType: recipeImage.type,
         };
         try {
         await s3.upload(s3Params).promise();
