@@ -42,7 +42,7 @@ function RecipeFormPage() {
             Key: imageKey,
             Body: recipeImage,
             ACL: "public-read",
-            ContentType: recipeImage.type,
+            ContentType: `image/${recipeImage.type}`,
         };
         try {
         await s3.upload(s3Params).promise();
