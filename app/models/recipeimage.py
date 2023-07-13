@@ -10,7 +10,7 @@ class RecipeImage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('recipes.id'), name='fk_recipe_image_recipe_id_recipes', ondelete="CASCADE"))
-    image_url = db.Column(db.String(100), nullable=False)
+    image_url = db.Column(db.String(250), nullable=False)
 
     recipe_imgs = db.relationship('Recipe', back_populates='recipe_w_images')
 
