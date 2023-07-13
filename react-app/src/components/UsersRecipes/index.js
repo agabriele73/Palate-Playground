@@ -28,7 +28,7 @@ function UsersRecipesPage() {
             {myRecipesArray.map((recipe) => (
                 <div key={recipe.id} className="recipe-card">
                 <NavLink to={`/recipes/${recipe.id}`} className="recipe-link">
-                        <img src={recipe.images[0]} alt={recipe.images} />
+                        <img src={recipe.images} alt={recipe.images} />
                         <h4>
                             {recipe.title}
                         </h4>
