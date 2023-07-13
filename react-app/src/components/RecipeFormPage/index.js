@@ -36,7 +36,7 @@ function RecipeFormPage() {
 
         const s3 = new AWS.S3();
 
-        const imageKey = `recipe-images/${Date.now()}-${recipeImage}`;
+        const imageKey = `recipe-images/${Date.now()}-${recipeImage.name}`;
         const s3Params = {
             Bucket: "palateplaygroundbucket2",
             Key: imageKey,
