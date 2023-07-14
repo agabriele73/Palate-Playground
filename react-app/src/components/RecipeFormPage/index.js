@@ -47,7 +47,7 @@ function RecipeFormPage() {
         try {
         await s3.upload(s3Params).promise();
 
-        const imageUrl = `http://palateplaygroundbucket2.s3-website-us-west-1.amazonaws.com/${imageKey}`;
+        const imageUrl = `https://palateplaygroundbucket2.s3-website-us-west-1.amazonaws.com/${imageKey}`;
         const newRecipe = {
             title: title,
             protein_type: proteinType,
