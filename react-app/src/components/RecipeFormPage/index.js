@@ -42,12 +42,13 @@ function RecipeFormPage() {
             Key: imageKey,
             Body: recipeImage,
             ACL: "public-read",
-            ContentType: `image/${recipeImage.type}`,
+            ContentType: `${recipeImage.type}`,
         };
+        console.log('--------------',recipeImage)
         try {
         await s3.upload(s3Params).promise();
 
-        const imageUrl = `https://palateplaygroundbucket2.s3-website-us-west-1.amazonaws.com/${recipeImage.name}`;
+        const imageUrl = `http://palateplaygroundbucket2.s3-website-us-west-1.amazonaws.com/${imageKey}`;
         const newRecipe = {
             title: title,
             protein_type: proteinType,
