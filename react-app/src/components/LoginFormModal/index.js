@@ -37,13 +37,13 @@ function LoginFormModal() {
 
   };
 
-  const onSuccess = (res) => {
-    console.log("login success", res.ProfileObj);
-  }
+  // const onSuccess = (res) => {
+  //   console.log("login success", res.ProfileObj);
+  // }
 
-  const onFailure = (res) => {
-    console.log("login failure", res);
-  }
+  // const onFailure = (res) => {
+  //   console.log("login failure", res);
+  // }
   
   // const handleGoogleSignIn = () => {
   //   window.gapi.auth2
@@ -95,7 +95,7 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
-        {/* <div class="g-signin2" data-onsuccess="handleGoogleSignIn"><button onClick={handleGoogleSignIn}>Sign In with Google</button></div> */}
+        {/* <div class="g-signin2" data-onsuccess="handleGoogleSignIn"><button onClick={handleGoogleSignIn}>Sign In with Google</button></div>
         <div>
           <GoogleLogin
             clientId={clientId}
@@ -105,7 +105,7 @@ function LoginFormModal() {
             cookiePolicy={'single_host_origin'}
             isSignedIn={true}
           />
-        </div>
+        </div> */}
     </ div>
   );
 }

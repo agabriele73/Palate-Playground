@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import * as recipeActions from "../../store/recipe";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import AWS from "aws-sdk";
-import config from "../../config";
+// import AWS from "aws-sdk";
+// import config from "../../config";
 import './RecipeForm.css';
 
 
 // const awsAccessKey = process.env.REACT_APP_AWS_ACCESS_KEY
 // const awsSecretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
 
-AWS.config.update({
-    accessKeyId: config.awsAccessKey,
-    secretAccessKey: config.awsSecretAccessKey,
-    region: "us-west-1"
-})
+// AWS.config.update({
+//     accessKeyId: config.awsAccessKey,
+//     secretAccessKey: config.awsSecretAccessKey,
+//     region: "us-west-1"
+// })
 
 
 function RecipeFormPage() {
@@ -34,21 +34,21 @@ function RecipeFormPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const s3 = new AWS.S3();
+        // const s3 = new AWS.S3();
 
-        const imageKey = `recipe-images/${Date.now()}-${recipeImage.name}`;
-        const s3Params = {
-            Bucket: "palateplaygroundbucket2",
-            Key: imageKey,
-            Body: recipeImage,
-            ACL: "public-read",
-            ContentType: `${recipeImage.type}`,
-        };
-        console.log('--------------',recipeImage)
-        try {
-        await s3.upload(s3Params).promise();
+        // const imageKey = `recipe-images/${Date.now()}-${recipeImage.name}`;
+        // const s3Params = {
+        //     Bucket: "palateplaygroundbucket2",
+        //     Key: imageKey,
+        //     Body: recipeImage,
+        //     ACL: "public-read",
+        //     ContentType: `${recipeImage.type}`,
+        // };
+        // console.log('--------------',recipeImage)
+        // try {
+        // await s3.upload(s3Params).promise();
 
-        const imageUrl = `http://palateplaygroundbucket2.s3-website-us-west-1.amazonaws.com/${imageKey}`;
+        // const imageUrl = `http://palateplaygroundbucket2.s3-website-us-west-1.amazonaws.com/${imageKey}`;
         const newRecipe = {
             title: title,
             protein_type: proteinType,
@@ -59,16 +59,16 @@ function RecipeFormPage() {
             steps_link: stepsLink,
         }
         
-        if (imageUrl) {
-            setRecipeImage(imageUrl);
-            newImage = {
-            image_url: imageUrl,
-        }
-        } else {
+        // if (imageUrl) {
+        //     setRecipeImage(imageUrl);
+        //     newImage = {
+        //     image_url: imageUrl,
+        // }
+        // } else {
             newImage = {
                 image_url: recipeImage,
             }
-        }
+        // }
         
         const createdRecipe = await dispatch(recipeActions.addRecipeThunk(newRecipe, newImage));
         console.log(createdRecipe);
@@ -78,9 +78,9 @@ function RecipeFormPage() {
         } else {
             history.push(`/recipes/my-recipes`);
         }
-        } catch (err) {
-            console.log(err);
-        }
+        // } catch (err) {
+        //     console.log(err);
+        // }
 
     }
 
@@ -182,16 +182,16 @@ function RecipeFormPage() {
                 <div className="recipe-image">
                 <label>
                     Recipe Image:
-                    {/* <input
+                    <input
                         type="text"
                         value={recipeImage}
                         onChange={(e) => setRecipeImage(e.target.value)}
-                    />  */}
-                    <input
+                    /> 
+                    {/* <input
                         className="file-upload"
                         type="file"
                         onChange={(e) => setRecipeImage(e.target.files[0])}
-                    />
+                    /> */}
                 </label>
                 </div>
                 <br/>
