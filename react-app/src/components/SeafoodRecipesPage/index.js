@@ -23,7 +23,7 @@ function SeafoodRecipesPage() {
             {seafoodRecipes.map((recipe) => (
                 <div key={recipe.id} className="recipe-card">
                     <NavLink to={`/recipes/${recipe.id}`} className="recipe-link">
-                        <img src={recipe.images} alt={recipe.images} />
+                        <img src={recipe.image} alt={recipe.images} />
                         <h4>
                             {recipe.title}
                         </h4>

@@ -23,7 +23,6 @@ function EditRecipeForm({ recipeId }) {
 
     useEffect(() => {
         dispatch(recipeActions.setCurrentRecipeThunk(recipeId));
-        dispatch(recipeActions.fetchRecipeImageThunk(recipeId));
     }, [dispatch, recipeId]);
 
     useEffect(() => {
@@ -162,7 +161,7 @@ function EditRecipeForm({ recipeId }) {
                     </label>
                 </div>
                 <div className="edit-submit-button">    
-                    <button type="submit">Submit</button>
+                    <button type="submit">Save Changes</button>
                     <button onClick={closeModal}>Cancel</button>
                 </div>
             </form>

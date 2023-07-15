@@ -45,7 +45,7 @@ function CurrentRecipePage() {
             <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
 
             <div className="recipe-info-grid">
-                <img src={currentRecipe.images} alt={currentRecipe.title} className="recipe-img"/>
+                <img src={currentRecipe.image_url} alt={currentRecipe.title} className="recipe-img"/>
                 <div className="recipe-video">
                 <h3>follow along: </h3>
                 <iframe
