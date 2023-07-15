@@ -18,7 +18,6 @@ function EditRecipeForm({ recipeId }) {
     const [recipeImage , setRecipeImage] = useState("");
     const [errors , setErrors] = useState([]);
     const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
-    const currImage = useSelector((state) => state.recipe.recipeImage);
     const { closeModal } = useModal();
 
     useEffect(() => {
@@ -34,7 +33,7 @@ function EditRecipeForm({ recipeId }) {
         setPrepTime(currentRecipe.prep_time);
         setCookTime(currentRecipe.cook_time);
         setStepsLink(currentRecipe.steps_link);
-        setRecipeImage(currentRecipe.images);
+        setRecipeImage(currentRecipe.image_url);
         }
     }, [currentRecipe]);
     
@@ -51,12 +50,8 @@ function EditRecipeForm({ recipeId }) {
             steps_link: stepsLink,
         }
         
-        const updatedImage = {
-            id: currImage.id,
-            image_url: recipeImage
-        }
 
-        const data = await dispatch(recipeActions.editRecipeThunk(updateRecipe, updatedImage));
+        const data = await dispatch(recipeActions.editRecipeThunk(updateRecipe));
         if (data && data.errors) {
             setErrors(data.errors);
             console.log('-----data in edit recipe component', data)

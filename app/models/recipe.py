@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-import re
 
 
 class Recipe(db.Model):
@@ -18,7 +17,7 @@ class Recipe(db.Model):
     cook_time = db.Column(db.String(50), nullable=False)
     steps_link = db.Column(db.String(125), nullable=False)
     image_url = db.Column(db.String(250), nullable=False)
-
+    
     owned_recipe = db.relationship('User', back_populates='recipe_owner')
     comments_on_recipe = db.relationship('Comment', back_populates='recipe_comment')
     recipe_favorites = db.relationship('Favorite', back_populates='favorites_recipe')

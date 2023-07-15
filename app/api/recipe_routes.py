@@ -1,7 +1,7 @@
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from app.forms import RecipeForm, CommentForm
-from app.models import Recipe, User, Comment, db
+from app.forms import RecipeForm
+from app.models import Recipe, User, db
 
 recipe_routes = Blueprint('recipes', __name__)
 def validation_errors_to_error_messages(validation_errors):
@@ -68,15 +68,6 @@ def get_my_recipes():
 
         recipe_data.append(recipe_dict)
     return jsonify({"Recipes": recipe_data})
-
-@recipe_routes.route('/<int:recipe_id>/images', methods=['GET'])
-@login_required
-def get_images_byrecipeId(recipe_id):
-    recipe = Recipe.query.get(recipe_id)
-    recipe_images = RecipeImage.query.filter_by(recipe_id=recipe.id).all()
-    image_urls = [ image.to_dict() for image in recipe_images]
-
-    return jsonify(image_urls)
 
 @recipe_routes.route('/<int:recipe_id>', methods=['GET'])
 def get_recipe_byId(recipe_id):
@@ -154,6 +145,7 @@ def update_recipe(recipe_id):
         recipe.prep_time = form.data['prep_time']
         recipe.cook_time = form.data['cook_time']
         recipe.steps_link = form.data['steps_link']
+        recipe.image_url = form.data['image_url']
 
         db.session.commit()
 
