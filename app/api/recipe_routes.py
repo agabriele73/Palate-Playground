@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_required
-from app.forms import RecipeForm, RecipeImageForm, CommentForm
-from app.models import Recipe, RecipeImage, User, Comment, db
+from app.forms import RecipeForm, CommentForm
+from app.models import Recipe, User, Comment, db
 
 recipe_routes = Blueprint('recipes', __name__)
 def validation_errors_to_error_messages(validation_errors):
@@ -22,8 +22,6 @@ def get_all_recipes():
 
     recipe_data = []
     for recipe in recipes:
-        recipe_images = RecipeImage.query.filter_by(recipe_id=recipe.id).all()
-        image_urls = [ image.image_url for image in recipe_images]
         recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
         owner = [ owner.username for owner in recipe_owners]
 
@@ -37,7 +35,7 @@ def get_all_recipes():
             'prep_time': recipe.prep_time,
             'cook_time': recipe.cook_time,
             'steps_link': recipe.steps_link,
-            'images': image_urls,
+            'image': recipe.image_url,
             'owner': owner
         }
 
@@ -51,8 +49,6 @@ def get_my_recipes():
     recipes = Recipe.query.filter_by(owner_id=current_user.id).all()
     recipe_data = []
     for recipe in recipes:
-        recipe_images = RecipeImage.query.filter_by(recipe_id=recipe.id).all()
-        image_urls = [ image.image_url for image in recipe_images]
         recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
         owner = [ owner.username for owner in recipe_owners]
 
@@ -66,7 +62,7 @@ def get_my_recipes():
             'prep_time': recipe.prep_time,
             'cook_time': recipe.cook_time,
             'steps_link': recipe.steps_link,
-            'images': image_urls,
+            'image': recipe.image_url,
             'owner': owner
         }
 
@@ -85,8 +81,6 @@ def get_images_byrecipeId(recipe_id):
 @recipe_routes.route('/<int:recipe_id>', methods=['GET'])
 def get_recipe_byId(recipe_id):
     recipe = Recipe.query.get(recipe_id)
-    recipe_images = RecipeImage.query.filter_by(recipe_id=recipe.id).all()
-    image_urls = [ image.image_url for image in recipe_images]
     recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
     owner = [ owner.username for owner in recipe_owners]
 
@@ -100,7 +94,7 @@ def get_recipe_byId(recipe_id):
         'prep_time': recipe.prep_time,
         'cook_time': recipe.cook_time,
         'steps_link': recipe.steps_link,
-        'images': image_urls,
+        'image_url': recipe.image_url,
         'owner': owner
     }
 
@@ -126,7 +120,8 @@ def create_recipe():
             ingredients=form.data['ingredients'],
             prep_time=form.data['prep_time'],
             cook_time=form.data['cook_time'],
-            steps_link=form.data['steps_link']
+            steps_link=form.data['steps_link'],
+            image_url=form.data['image_url']
         )
 
         db.session.add(recipe)
@@ -184,67 +179,67 @@ def delete_recipe(recipe_id):
 
     return jsonify({'message': 'Successfully deleted'}), 200
 
-@recipe_routes.route('/<int:recipe_id>/images', methods=['POST', 'GET'])
-@login_required
-def add_recipe_image(recipe_id):
-    form = RecipeImageForm()
+# @recipe_routes.route('/<int:recipe_id>/images', methods=['POST', 'GET'])
+# @login_required
+# def add_recipe_image(recipe_id):
+#     form = RecipeImageForm()
 
-    form['csrf_token'].data = request.cookies['csrf_token']
+#     form['csrf_token'].data = request.cookies['csrf_token']
 
-    recipe = Recipe.query.get(recipe_id)
+#     recipe = Recipe.query.get(recipe_id)
 
-    if not recipe:
-        return jsonify({'message': 'Recipe not found'}), 404
+#     if not recipe:
+#         return jsonify({'message': 'Recipe not found'}), 404
     
-    if recipe.owner_id != current_user.id:
-        return jsonify({'message': 'You do not own this recipe'}), 401
+#     if recipe.owner_id != current_user.id:
+#         return jsonify({'message': 'You do not own this recipe'}), 401
 
-    if form.validate_on_submit():
+#     if form.validate_on_submit():
 
-        image = RecipeImage(
-            recipe_id=recipe_id,
-            image_url=form.data['image_url']
-        )
+#         image = RecipeImage(
+#             recipe_id=recipe_id,
+#             image_url=form.data['image_url']
+#         )
 
-        db.session.add(image)
-        db.session.commit()
+#         db.session.add(image)
+#         db.session.commit()
 
-        return jsonify(image.to_dict())
+#         return jsonify(image.to_dict())
     
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@recipe_routes.route('/<int:recipe_id>/images/<int:image_id>', methods=['PUT', 'GET'])
-@login_required
-def update_recipe_image(recipe_id, image_id):
-    form = RecipeImageForm()
+# @recipe_routes.route('/<int:recipe_id>/images/<int:image_id>', methods=['PUT', 'GET'])
+# @login_required
+# def update_recipe_image(recipe_id, image_id):
+#     form = RecipeImageForm()
 
-    form['csrf_token'].data = request.cookies['csrf_token']
+#     form['csrf_token'].data = request.cookies['csrf_token']
 
-    recipe = Recipe.query.get(recipe_id)
+#     recipe = Recipe.query.get(recipe_id)
 
-    if not recipe:
-        return jsonify({'message': 'Recipe not found'}), 404
+#     if not recipe:
+#         return jsonify({'message': 'Recipe not found'}), 404
     
-    if recipe.owner_id != current_user.id:
-        return jsonify({'message': 'You do not own this recipe'}), 401
+#     if recipe.owner_id != current_user.id:
+#         return jsonify({'message': 'You do not own this recipe'}), 401
 
-    image = RecipeImage.query.get(image_id)
+#     image = RecipeImage.query.get(image_id)
 
-    if not image:
-        return jsonify({'message': 'Image not found'}), 404
+#     if not image:
+#         return jsonify({'message': 'Image not found'}), 404
     
-    if image.recipe_id != recipe_id:
-        return jsonify({'message': 'You do not own this image'}), 401
+#     if image.recipe_id != recipe_id:
+#         return jsonify({'message': 'You do not own this image'}), 401
 
-    if form.validate_on_submit():
+#     if form.validate_on_submit():
 
-        image.image_url = form.data['image_url']
+#         image.image_url = form.data['image_url']
 
-        db.session.commit()
+#         db.session.commit()
 
-        return jsonify(image.to_dict())
+#         return jsonify(image.to_dict())
     
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 

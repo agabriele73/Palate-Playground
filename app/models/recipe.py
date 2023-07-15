@@ -17,16 +17,16 @@ class Recipe(db.Model):
     prep_time = db.Column(db.String(50), nullable=False)
     cook_time = db.Column(db.String(50), nullable=False)
     steps_link = db.Column(db.String(125), nullable=False)
+    image_url = db.Column(db.String(250), nullable=False)
 
     owned_recipe = db.relationship('User', back_populates='recipe_owner')
     comments_on_recipe = db.relationship('Comment', back_populates='recipe_comment')
-    recipe_w_images = db.relationship('RecipeImage', back_populates='recipe_imgs')
     recipe_favorites = db.relationship('Favorite', back_populates='favorites_recipe')
 
     # @db.validates('steps_link')
-    # def validate_steps_link(self, key, steps_link):
-    #     if not is_valid_url(steps_link):
-    #         raise ValueError('Invalid url')
+    # def validate_steps_link(key, steps_link):
+    #     if not re.match(r"^https://www.youtube.com/embed/[a-zA-Z0-9]+$", steps_link):
+    #         raise ValueError('Invalid youtube embed url')
     #     return steps_link
 
     def to_dict(self):

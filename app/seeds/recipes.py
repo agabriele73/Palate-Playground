@@ -12,7 +12,8 @@ def seed_recipes():
         ingredients='test ingredients, ingredient, ingredient, ingredient, ingredient',
         prep_time='test prep time',
         cook_time='test cook time',
-        steps_link='https://www.youtube.com/embed/dKPFcfXj8I4'
+        steps_link='https://www.youtube.com/embed/dKPFcfXj8I4',
+        image_url='https://i.imgur.com/tw3WrtL.png'
     )
 
     recipe1 = Recipe(
@@ -23,7 +24,8 @@ def seed_recipes():
         ingredients='1 pound spaghetti, ¼ lb (123g) finely chopped mortadella, 1 lb (454g) ground beef, 1 tsp (2g) finely ground fennel seed (optional), 1 ¾ tsp (12g) fine sea salt, 3 cloves garlic (finely chopped), 1/4 cup (20g) fresh grated pecorino or parmesan, black pepper to taste, ½ cup (35g) panko bread crumbs crushed tell mostly fine, 1 whole egg, Sauce:, ¼ cup (50g) extra virgin olive oil, 4 cloves garlic (thinly sliced), 1 tsp (2g) red pepper flakes, 1 28 oz can crushed tomatoes, 1 bunch of basil, freshly grated Parmigiano for serving, chiffonade basil for serving',
         prep_time='15 minutes',
         cook_time='20 minutes',
-        steps_link="https://www.youtube.com/embed/izAm3Ie9mNo"
+        steps_link="https://www.youtube.com/embed/izAm3Ie9mNo",
+        image_url='https://i.imgur.com/EDkTzM4.jpg'
     )
 
     recipe2 = Recipe(
@@ -34,7 +36,8 @@ def seed_recipes():
         ingredients='1 (5 to 6 pound) roasting chicken, Kosher salt, Freshly ground black pepper, 1 large bunch fresh thyme, plus 20 sprigs, 1 lemon, halved, 1 head garlic, cut in half crosswise, 2 tablespoons (1/4 stick) butter, melted, 1 large yellow onion, thickly sliced, 4 carrots, cut into 2-inch chunks, 1 bulb of fennel, tops removed, and cut into wedges, Olive oil',
         prep_time='30 minutes',
         cook_time='1 hour',
-        steps_link="https://www.youtube.com/embed/Ys7dyV97FXw"
+        steps_link="https://www.youtube.com/embed/Ys7dyV97FXw",
+        image_url='https://i.imgur.com/uKTWVr6.jpg'
     )
 
     recipe3 = Recipe(
@@ -45,7 +48,8 @@ def seed_recipes():
         ingredients='4 cups (1 liter) Milk, 12oz (340g) Pasta (elbow macaroni), 7oz (200g) Cheddar cheese (shredded), 1 teaspoon Salt, 1/4 teaspoon Black pepper, 1/4 teaspoon Paprika',
         prep_time='20 minutes',
         cook_time='20 minutes',
-        steps_link="https://www.youtube.com/embed/IzLn0pXntNE"
+        steps_link="https://www.youtube.com/embed/IzLn0pXntNE",
+        image_url='https://i.imgur.com/Tpuy1Eq.jpg'
     )
 
     recipe4 = Recipe(
@@ -56,7 +60,8 @@ def seed_recipes():
         ingredients= '4 firm white fish fillets (about 6 inches long & 1-inch thickness throughout), 3 TB melted butter, Juice and zest from 1 medium lemon, ½ tsp kosher salt (plus extra to taste), 1 tsp paprika, 1 tsp garlic powder, 1 tsp onion powder, ¼ tsp freshly ground black pepper, 3 TbSp olive oil, freshly chopped basil or parsley leaves (for garnish and flavor), extra lemon slices (for serving)',
         prep_time='10 minutes',
         cook_time='15 minutes',
-        steps_link="https://www.youtube.com/embed/fFgaUq_mdMI"
+        steps_link="https://www.youtube.com/embed/fFgaUq_mdMI",
+        image_url='https://i.imgur.com/HSKWnPX.jpg'
     )
 
 

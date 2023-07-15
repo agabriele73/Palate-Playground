@@ -57,21 +57,12 @@ function RecipeFormPage() {
             prep_time: prepTime,
             cook_time: cookTime,
             steps_link: stepsLink,
+            image_url: recipeImage
         }
         
-        // if (imageUrl) {
-        //     setRecipeImage(imageUrl);
-        //     newImage = {
-        //     image_url: imageUrl,
-        // }
-        // } else {
-            newImage = {
-                image_url: recipeImage,
-            }
-        // }
         try{
 
-            const createdRecipe = await dispatch(recipeActions.addRecipeThunk(newRecipe, newImage));
+            const createdRecipe = await dispatch(recipeActions.addRecipeThunk(newRecipe));
             console.log(createdRecipe);
             
             if(createdRecipe && createdRecipe.errors) {
@@ -180,7 +171,7 @@ function RecipeFormPage() {
                     Steps Link:
                     <input
                         type="text"
-                        placeholder="https://yourvideolink.com"
+                        placeholder="https://www.youtube.com/embed/YourVideoID"
                         value={stepsLink}
                         onChange={(e) => setStepsLink(e.target.value)}
                     />

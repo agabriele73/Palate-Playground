@@ -37,6 +37,18 @@ function LoginFormModal() {
 
   };
 
+  const loginDemoUser = async () => {
+    const demoEmail = "demo@aa.io";
+    const demoPassword = "password";
+
+    const data = await dispatch(login(demoEmail, demoPassword));
+    if (data) {
+      setErrors(data);
+    } else {
+      closeModal();
+    }
+  };
+
   // const onSuccess = (res) => {
   //   console.log("login success", res.ProfileObj);
   // }
@@ -95,6 +107,7 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+      <button onClick={loginDemoUser}>Log In as Demo User</button>
         {/* <div class="g-signin2" data-onsuccess="handleGoogleSignIn"><button onClick={handleGoogleSignIn}>Sign In with Google</button></div>
         <div>
           <GoogleLogin

@@ -30,13 +30,13 @@ const addRecipe = (recipe) => ({
     payload: recipe
 })
 
-const addImage = (recipeId, image) => ({
-    type: ADD_RECIPE_IMAGE,
-    payload: {
-        recipeId,
-        image
-    }
-})
+// const addImage = (recipeId, image) => ({
+//     type: ADD_RECIPE_IMAGE,
+//     payload: {
+//         recipeId,
+//         image
+//     }
+// })
 
 const deleteRecipe = (recipeId) => ({
     type: DELETE_RECIPE,
@@ -48,18 +48,18 @@ const editRecipe = (recipe) => ({
     payload: recipe
 })
 
-const editImage = (recipeId, image) => ({
-    type: EDIT_RECIPE_IMAGW,
-    payload: {
-        recipeId,
-        image
-    }
-})
+// const editImage = (recipeId, image) => ({
+//     type: EDIT_RECIPE_IMAGW,
+//     payload: {
+//         recipeId,
+//         image
+//     }
+// })
 
-const setRecipeImage = (image) => ({
-    type: SET_RECIPE_IMAGE,
-    payload: image
-})
+// const setRecipeImage = (image) => ({
+//     type: SET_RECIPE_IMAGE,
+//     payload: image
+// })
 
 
 export const fetchRecipesThunk = () => async (dispatch) => {
@@ -70,13 +70,13 @@ export const fetchRecipesThunk = () => async (dispatch) => {
     }
 }
 
-export const fetchRecipeImageThunk = (recipeId) => async (dispatch) => {
-    const response = await fetch(`/api/recipes/${recipeId}/images`);
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setRecipeImage(data));
-    }
-}
+// export const fetchRecipeImageThunk = (recipeId) => async (dispatch) => {
+//     const response = await fetch(`/api/recipes/${recipeId}/images`);
+//     if (response.ok) {
+//         const data = await response.json();
+//         dispatch(setRecipeImage(data));
+//     }
+// }
 
 export const setCurrentRecipeThunk = (recipe) => async (dispatch) => {
     const response = await fetch(`/api/recipes/${recipe}`);
@@ -86,7 +86,7 @@ export const setCurrentRecipeThunk = (recipe) => async (dispatch) => {
     }
 }
 
-export const addRecipeThunk = (recipe, image) => async (dispatch) => {
+export const addRecipeThunk = (recipe) => async (dispatch) => {
     const response = await fetch(`/api/recipes`, {
         method: "POST",
         headers: {
@@ -103,26 +103,10 @@ export const addRecipeThunk = (recipe, image) => async (dispatch) => {
 
     const recipeData = await response.json();
     console.log(recipeData);
-    const recipeId = recipeData.id;
 
-    const imageResponse = await fetch(`/api/recipes/${recipeId}/images`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(image),
-    });
 
-    if (!imageResponse.ok) {
-        const data = await imageResponse.json();
-        console.error(data);
-        return data;
-    }
-
-    const imageData = await imageResponse.json();
-    if (response.ok && imageResponse.ok) {
+    if (response.ok ) {
         dispatch(addRecipe(recipeData));
-        dispatch(addImage(recipeId, imageData.image_url));
     }
 };
 
@@ -165,25 +149,7 @@ export const editRecipeThunk = (recipe, image) => async (dispatch) => {
 
         const recipeData = await response.json();
         console.log(recipeData)
-        const recipeId = recipeData.id
-
-        const imageResponse = await fetch(`/api/recipes/${recipeId}/images/${image.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(image),
-        })
-
-        if (!imageResponse.ok) {
-            const data = await imageResponse.json();
-            return data
-        }
-
-        const imageData = await imageResponse.json();
-
         dispatch(editRecipe(recipeData))
-        dispatch(editImage(recipeId, imageData.image_url))
 
     } catch (error) {
         console.error(error);
