@@ -10,6 +10,7 @@ import ChickenRecipesPage from "./components/ChickenRecipesPage";
 import BeefRecipesPage from "./components/BeefRecipesPage";
 import SeafoodRecipesPage from "./components/SeafoodRecipesPage";
 import VegetarianRecipesPage from "./components/VegetarianRecipesPage";
+import Footer from "./components/Footer";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -24,35 +25,38 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <RecipeHomePage />
-          </Route>
-          <Route exact path="/recipes/new">
-            <RecipeFormPage />
-          </Route>
-          <Route exact path="/recipes/my-recipes">
-            <UsersRecipesPage />
-          </Route>
-          <Route exact path="/recipes">
-            <AllRecipesPage />
-          </Route>
-          <Route exact path="/recipes/chicken"> 
-            <ChickenRecipesPage />
-          </Route>
-          <Route exact path="/recipes/beef">
-            <BeefRecipesPage />
-          </Route>
-          <Route exact path="/recipes/seafood">
-            <SeafoodRecipesPage />
-          </Route>
-          <Route exact path="/recipes/vegetarian">
-            <VegetarianRecipesPage />
-          </Route>
-          <Route exact path="/recipes/:recipe_id">
-            <CurrentRecipePage />
-          </Route>
-        </Switch>
+        <>
+          <Switch>
+            <Route exact path="/">
+              <RecipeHomePage />
+            </Route>
+            <Route exact path="/recipes/new">
+              <RecipeFormPage />
+            </Route>
+            <Route exact path="/recipes/my-recipes">
+              <UsersRecipesPage />
+            </Route>
+            <Route exact path="/recipes">
+              <AllRecipesPage />
+            </Route>
+            <Route exact path="/recipes/chicken"> 
+              <ChickenRecipesPage />
+            </Route>
+            <Route exact path="/recipes/beef">
+              <BeefRecipesPage />
+            </Route>
+            <Route exact path="/recipes/seafood">
+              <SeafoodRecipesPage />
+            </Route>
+            <Route exact path="/recipes/vegetarian">
+              <VegetarianRecipesPage />
+            </Route>
+            <Route exact path="/recipes/:recipe_id">
+              <CurrentRecipePage />
+            </Route>
+          </Switch>
+          <Footer />
+        </>
       )}
     </>
   );
