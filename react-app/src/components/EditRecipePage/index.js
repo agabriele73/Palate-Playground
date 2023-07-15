@@ -48,6 +48,7 @@ function EditRecipeForm({ recipeId }) {
             prep_time: prepTime,
             cook_time: cookTime,
             steps_link: stepsLink,
+            image_url: recipeImage
         }
         
 
