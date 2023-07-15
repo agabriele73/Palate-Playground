@@ -63,3 +63,7 @@ ul {
     transition: 1.0s;
 }
 
+.error {
+    color: red;
+}
+
