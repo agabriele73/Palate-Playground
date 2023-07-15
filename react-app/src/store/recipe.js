@@ -1,12 +1,8 @@
 const SET_RECIPES = "recipe/GET_ALL_RECIPES";
 const SET_CURRENT_RECIPE = "recipe/SET_CURRENT_RECIPE";
-const SET_RECIPE_IMAGE = "recipe/SET_RECIPE_IMAGE";
 const ADD_RECIPE = "recipe/ADD_RECIPE";
-const ADD_RECIPE_IMAGE = "recipe/ADD_RECIPE_IMAGE";
 const EDIT_RECIPE = "recipe/EDIT_RECIPE";
-const EDIT_RECIPE_IMAGW = "recipe/EDIT_RECIPE_IMAGE";
 const DELETE_RECIPE = "recipe/DELETE_RECIPE";
-
 
 
 const initialState = {
@@ -15,6 +11,7 @@ const initialState = {
     newRecipe: null,
     recipeImage: null
 }
+
 const setRecipes = (recipes) => ({
     type: SET_RECIPES,
     payload: recipes
@@ -30,13 +27,6 @@ const addRecipe = (recipe) => ({
     payload: recipe
 })
 
-// const addImage = (recipeId, image) => ({
-//     type: ADD_RECIPE_IMAGE,
-//     payload: {
-//         recipeId,
-//         image
-//     }
-// })
 
 const deleteRecipe = (recipeId) => ({
     type: DELETE_RECIPE,
@@ -48,19 +38,6 @@ const editRecipe = (recipe) => ({
     payload: recipe
 })
 
-// const editImage = (recipeId, image) => ({
-//     type: EDIT_RECIPE_IMAGW,
-//     payload: {
-//         recipeId,
-//         image
-//     }
-// })
-
-// const setRecipeImage = (image) => ({
-//     type: SET_RECIPE_IMAGE,
-//     payload: image
-// })
-
 
 export const fetchRecipesThunk = () => async (dispatch) => {
     const response = await fetch("/api/recipes");
@@ -70,13 +47,7 @@ export const fetchRecipesThunk = () => async (dispatch) => {
     }
 }
 
-// export const fetchRecipeImageThunk = (recipeId) => async (dispatch) => {
-//     const response = await fetch(`/api/recipes/${recipeId}/images`);
-//     if (response.ok) {
-//         const data = await response.json();
-//         dispatch(setRecipeImage(data));
-//     }
-// }
+
 
 export const setCurrentRecipeThunk = (recipe) => async (dispatch) => {
     const response = await fetch(`/api/recipes/${recipe}`);
@@ -109,8 +80,6 @@ export const addRecipeThunk = (recipe) => async (dispatch) => {
         dispatch(addRecipe(recipeData));
     }
 };
-
-
 
 
 export const fetchUsersRecipesThunk = () => async (dispatch) => {
@@ -171,12 +140,6 @@ export default function recipeReducer(state = initialState, action) {
             return newState;
         case ADD_RECIPE:
             newState.newRecipe = action.payload;
-            return newState;
-        case SET_RECIPE_IMAGE:
-            newState.recipeImage = action.payload;
-            return newState;
-        case ADD_RECIPE_IMAGE:
-            newState.recipeImage = action.payload;
             return newState;
         case EDIT_RECIPE:
             newState.currentRecipe = action.payload;
