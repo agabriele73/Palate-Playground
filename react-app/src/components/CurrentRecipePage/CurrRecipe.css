@@ -43,6 +43,7 @@
     display: block;
     margin-right: 40px;
     margin-left: 40px;
+    margin-bottom: 40px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     transform: scale(1.1);
     z-index: 1;
