@@ -100,8 +100,8 @@ export const deleteRecipeThunk = (recipeId) => async (dispatch) => {
 
 }
 
-export const editRecipeThunk = (recipe, image) => async (dispatch) => {
-    console.log(recipe, image)
+export const editRecipeThunk = (recipe) => async (dispatch) => {
+    console.log(recipe)
     try {
         const response = await fetch(`/api/recipes/${recipe.id}`, {
             method: "PUT",
