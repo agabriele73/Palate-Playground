@@ -87,46 +87,47 @@ export const setCurrentRecipeThunk = (recipe) => async (dispatch) => {
 }
 
 export const addRecipeThunk = (recipe, image) => async (dispatch) => {
-    try {
-        const response = await fetch(`/api/recipes`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(recipe),
-        })
+    const response = await fetch(`/api/recipes`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(recipe),
+    });
 
-        if (!response.ok) {
-            const data = await response.json();
-            return data
-        }
-
-        const recipeData = await response.json();
-        console.log(recipeData)
-        const recipeId = recipeData.id
-
-        const imageResponse = await fetch(`/api/recipes/${recipeId}/images`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(image),
-        })
-
-        if (!imageResponse.ok) {
-            const data = await imageResponse.json();
-            return data
-        }
-
-        const imageData = await imageResponse.json();
-
-        dispatch(addRecipe(recipeData))
-
-        dispatch(addImage(recipeId, imageData.image_url))
-    } catch (error) {
-        console.error(error);
+    if (!response.ok) {
+        const data = await response.json();
+        console.error(data);
+        return data;
     }
-}
+
+    const recipeData = await response.json();
+    console.log(recipeData);
+    const recipeId = recipeData.id;
+
+    const imageResponse = await fetch(`/api/recipes/${recipeId}/images`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(image),
+    });
+
+    if (!imageResponse.ok) {
+        const data = await imageResponse.json();
+        console.error(data);
+        return data;
+    }
+
+    const imageData = await imageResponse.json();
+    if (response.ok && imageResponse.ok) {
+        dispatch(addRecipe(recipeData));
+        dispatch(addImage(recipeId, imageData.image_url));
+    }
+};
+
+
+
 
 export const fetchUsersRecipesThunk = () => async (dispatch) => {
     const response = await fetch("/api/recipes/my-recipes");

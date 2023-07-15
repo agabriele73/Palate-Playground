@@ -69,18 +69,19 @@ function RecipeFormPage() {
                 image_url: recipeImage,
             }
         // }
-        
-        const createdRecipe = await dispatch(recipeActions.addRecipeThunk(newRecipe, newImage));
-        console.log(createdRecipe);
+        try{
 
-        if(createdRecipe && createdRecipe.errors) {
-            setErrors(createdRecipe.errors);
-        } else {
-            history.push(`/recipes/my-recipes`);
+            const createdRecipe = await dispatch(recipeActions.addRecipeThunk(newRecipe, newImage));
+            console.log(createdRecipe);
+            
+            if(createdRecipe && createdRecipe.errors) {
+                setErrors(createdRecipe.errors);
+            } else {
+                history.push(`/recipes/my-recipes`);
+            }
+        } catch (err) {
+            console.log(err);
         }
-        // } catch (err) {
-        //     console.log(err);
-        // }
 
     }
 
@@ -97,7 +98,7 @@ function RecipeFormPage() {
                 Add Your Recipe!    
             </h1>
             {errors.map((error, idx) => (
-                <p key={idx}>{error}</p>
+                <li key={idx} className="error">{error}</li>
             ))}
             <form onSubmit={handleSubmit} className="form-grid">
                 <div className="form-item">
@@ -105,6 +106,7 @@ function RecipeFormPage() {
                     Title:
                     <input
                         type="text"
+                        placeholder="Add a title...."
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
@@ -132,6 +134,7 @@ function RecipeFormPage() {
                     Steps:
                     <textarea
                         type="text"
+                        placeholder="Add your steps..."
                         value={steps}
                         onChange={(e) => setSteps(e.target.value)}
                     />
@@ -144,6 +147,7 @@ function RecipeFormPage() {
                     <h6>please seperate your ingredients with a comma to ensure display properly</h6>
                     <textarea
                         type="text"
+                        placeholder="Add your ingredients... ingredient 1, ingredient 2, ingredient 3"
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
                     />
@@ -156,6 +160,7 @@ function RecipeFormPage() {
                     <input
                         type="text"
                         value={prepTime}
+                        placeholder="ex: 12 minutes..."
                         onChange={(e) => setPrepTime(e.target.value)}
                     />
                 </label>
@@ -163,6 +168,7 @@ function RecipeFormPage() {
                     Cook Time:
                     <input
                         type="text"
+                        placeholder="ex: 1 hour..."
                         value={cookTime}
                         onChange={(e) => setCookTime(e.target.value)}
                     />
@@ -174,6 +180,7 @@ function RecipeFormPage() {
                     Steps Link:
                     <input
                         type="text"
+                        placeholder="https://yourvideolink.com"
                         value={stepsLink}
                         onChange={(e) => setStepsLink(e.target.value)}
                     />
@@ -184,6 +191,7 @@ function RecipeFormPage() {
                     Recipe Image:
                     <input
                         type="text"
+                        placeholder="https://yourimagelink.com"
                         value={recipeImage}
                         onChange={(e) => setRecipeImage(e.target.value)}
                     /> 
