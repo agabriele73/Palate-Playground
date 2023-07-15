@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, SelectField  
-from wtforms.validators import DataRequired, Email, URL,ValidationError
+from wtforms import StringField, TextAreaField, SelectField  
+from wtforms.validators import DataRequired, URL,ValidationError
 from app.models import Recipe
 import re
 
