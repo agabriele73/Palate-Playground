@@ -6,7 +6,7 @@
     justify-content: center;
     background-color: #717744;
     color: #FEFEFE;
-    height: auto;
+    height: 100vh;
 }
 
 .edit-recipe-container h1 {
@@ -127,4 +127,11 @@
 .edit-submit-button button:hover {
     background-color: #717744;
     transform: scale(1.1);
+}
+
+
+@media screen and (max-width: 1080px) and (orientation: portrait) {
+    .edit-recipe-container {
+        height: auto;
+    }
 }

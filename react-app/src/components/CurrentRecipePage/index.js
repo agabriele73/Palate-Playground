@@ -78,11 +78,10 @@ function CurrentRecipePage() {
                     <h3>ingredients: </h3>
                     {ingredientsList()}
                 </div>
-                {/* <div className="recipe-social" style={{display: "flex", justifyContent: "space-evenly", alignItems: "center"}}>
+                <div className="recipe-social" style={{display: "flex", justifyContent: "space-evenly", alignItems: "center"}}>
                     <i className="fa-brands fa-instagram" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
-                    <i className="fa-brands fa-youtube" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
                     <i className="fa-brands fa-twitch" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
-                </div> */}
+                </div>
             </div>
         </div>
             <RecipeCommentsComponent recipeId={currentRecipe.id}/>

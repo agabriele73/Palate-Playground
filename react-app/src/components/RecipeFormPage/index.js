@@ -171,7 +171,7 @@ function RecipeFormPage() {
                     Steps Link:
                     <input
                         type="text"
-                        placeholder="https://www.youtube.com/embed/YourVideoID"
+                        placeholder="ex: https://www.youtube.com/embed/YourVideoID"
                         value={stepsLink}
                         onChange={(e) => setStepsLink(e.target.value)}
                     />
@@ -182,7 +182,7 @@ function RecipeFormPage() {
                     Recipe Image:
                     <input
                         type="text"
-                        placeholder="https://yourimagelink.com"
+                        placeholder="ex: https://yourimagelink.com"
                         value={recipeImage}
                         onChange={(e) => setRecipeImage(e.target.value)}
                     /> 
