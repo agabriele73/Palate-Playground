@@ -1,8 +1,8 @@
 """new db
 
-Revision ID: fb5591d324ce
+Revision ID: 8df75dda9fd9
 Revises: 
-Create Date: 2023-07-15 11:05:30.784049
+Create Date: 2023-07-15 11:53:24.741412
 
 """
 from alembic import op
@@ -13,9 +13,8 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
-
 # revision identifiers, used by Alembic.
-revision = 'fb5591d324ce'
+revision = '8df75dda9fd9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -65,12 +64,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE recipes SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE favorites SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 

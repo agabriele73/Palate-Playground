@@ -36,7 +36,7 @@ function RecipeHomePage() {
                 {slicedRecipes.map((recipe) => (
                     <NavLink to={`/recipes/${recipe.id}`} className="recipe-link">
                         <div key={recipe.id} className="recipe-card">
-                            <img src={recipe.image} alt={recipe.images} style={{width: "80%", height: "60%"}}/>
+                            <img src={recipe.image_url} alt={recipe.images} style={{width: "80%", height: "60%"}}/>
                             <h4>
                                 {recipe.title}
                             </h4>

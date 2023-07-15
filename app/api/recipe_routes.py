@@ -35,7 +35,7 @@ def get_all_recipes():
             'prep_time': recipe.prep_time,
             'cook_time': recipe.cook_time,
             'steps_link': recipe.steps_link,
-            'image': recipe.image_url,
+            'image_url': recipe.image_url,
             'owner': owner
         }
 
@@ -170,69 +170,3 @@ def delete_recipe(recipe_id):
     db.session.commit()
 
     return jsonify({'message': 'Successfully deleted'}), 200
-
-# @recipe_routes.route('/<int:recipe_id>/images', methods=['POST', 'GET'])
-# @login_required
-# def add_recipe_image(recipe_id):
-#     form = RecipeImageForm()
-
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-#     recipe = Recipe.query.get(recipe_id)
-
-#     if not recipe:
-#         return jsonify({'message': 'Recipe not found'}), 404
-    
-#     if recipe.owner_id != current_user.id:
-#         return jsonify({'message': 'You do not own this recipe'}), 401
-
-#     if form.validate_on_submit():
-
-#         image = RecipeImage(
-#             recipe_id=recipe_id,
-#             image_url=form.data['image_url']
-#         )
-
-#         db.session.add(image)
-#         db.session.commit()
-
-#         return jsonify(image.to_dict())
-    
-#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-# @recipe_routes.route('/<int:recipe_id>/images/<int:image_id>', methods=['PUT', 'GET'])
-# @login_required
-# def update_recipe_image(recipe_id, image_id):
-#     form = RecipeImageForm()
-
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-#     recipe = Recipe.query.get(recipe_id)
-
-#     if not recipe:
-#         return jsonify({'message': 'Recipe not found'}), 404
-    
-#     if recipe.owner_id != current_user.id:
-#         return jsonify({'message': 'You do not own this recipe'}), 401
-
-#     image = RecipeImage.query.get(image_id)
-
-#     if not image:
-#         return jsonify({'message': 'Image not found'}), 404
-    
-#     if image.recipe_id != recipe_id:
-#         return jsonify({'message': 'You do not own this image'}), 401
-
-#     if form.validate_on_submit():
-
-#         image.image_url = form.data['image_url']
-
-#         db.session.commit()
-
-#         return jsonify(image.to_dict())
-    
-#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-
-
-#POST COMMENT ROUTE
