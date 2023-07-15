@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-import re
 
 
 class User(db.Model, UserMixin):
@@ -23,11 +22,6 @@ class User(db.Model, UserMixin):
     def password(self):
         return self.hashed_password
     
-    # @db.validates('email')
-    # def validate_email(self, key, email):
-    #     if not is_valid_email_address(email):
-    #         raise ValueError('Invalid email address')
-    #     return email
 
 
     @password.setter
@@ -43,11 +37,3 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
         }
-
-# def is_valid_email_address(email_address) -> bool:
-#     match = re.match(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", email_address)
-#     return bool(match)
-
-# def is_valid_url(url) -> bool:
-#     match = re.match(r"^https:\/\/[0-9A-z.]+.[0-9A-z.]+.[a-z]+$", url)
-#     return bool(match)
