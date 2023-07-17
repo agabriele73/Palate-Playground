@@ -14,7 +14,7 @@ function Navigation({ isLoaded }){
 	);
 
 	return (
-		<div>
+		<div className='nav-container'>
 
 		<ol className="homebutton-profile">
 			<li>

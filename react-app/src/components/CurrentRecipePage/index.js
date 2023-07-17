@@ -19,17 +19,18 @@ function CurrentRecipePage() {
     }, [dispatch, recipe_id]);
 
     const ingredientsList = function() {
-        const ingredientsArr = currentRecipe.ingredients.split(", ");
-
+        const ingredientsArr = currentRecipe.ingredients.split(/,(?![^\s,]+)/);
+    
         return (
             <ol className="recipe-ingredients">
                 {ingredientsArr.map((ingredient, index) => (
                     <li key={ingredient}>{ingredient}</li>
-
                 ))}
             </ol>
-        )
+        );
     }
+    
+    
 
     // function getYouTubeVideoId(url) {
     //     const regex = /(?:youtube.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|[^#]*[?&]v=|youtu.be\/|[^#]+\?(?:.*&)?v=)([^&#?]{11}))/i;
@@ -78,10 +79,10 @@ function CurrentRecipePage() {
                     <h3>ingredients: </h3>
                     {ingredientsList()}
                 </div>
-                <div className="recipe-social" style={{display: "flex", justifyContent: "space-evenly", alignItems: "center"}}>
+                {/* <div className="recipe-social" style={{display: "flex", justifyContent: "space-evenly", alignItems: "center"}}>
                     <i className="fa-brands fa-instagram" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
                     <i className="fa-brands fa-twitch" style={{color: "black", fontSize: "60px", cursor: "pointer"}}></i>
-                </div>
+                </div> */}
             </div>
         </div>
             <RecipeCommentsComponent recipeId={currentRecipe.id}/>
