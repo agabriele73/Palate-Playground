@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from app.forms import RecipeForm
-from app.models import Recipe, User, db
+from app.forms import RecipeForm, FavoriteForm
+from app.models import Recipe, User, Favorite, db
 
 recipe_routes = Blueprint('recipes', __name__)
 def validation_errors_to_error_messages(validation_errors):
@@ -170,3 +170,36 @@ def delete_recipe(recipe_id):
     db.session.commit()
 
     return jsonify({'message': 'Successfully deleted'}), 200
+
+
+@recipe_routes.route('/<int:recipe_id>/favorite', methods=['POST'])
+@login_required
+def favorite_recipe(recipe_id):
+    fave_form = FavoriteForm()
+    fave_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if fave_form.validate_on_submit():
+        recipe = Recipe.query.get(recipe_id)
+
+        if not recipe:
+            return jsonify({'message': 'Recipe not found'}), 404
+
+        favorite_exists = Favorite.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
+        if favorite_exists:
+            return jsonify({'message': 'You already favorited this recipe'}), 401
+
+        if recipe.owner_id == current_user.id:
+            return jsonify({'message': 'You own this recipe'}), 401
+
+        favorite = Favorite(
+            fave=fave_form.data['fave'],
+            user_id=current_user.id,
+            recipe_id=recipe_id
+        )
+        
+        db.session.add(favorite)
+        db.session.commit()
+
+        return jsonify(favorite.to_dict())
+
+    return {'errors': validation_errors_to_error_messages(fave_form.errors)}, 401
