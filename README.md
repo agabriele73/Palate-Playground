@@ -4,6 +4,7 @@
 
 ## Live Link: 
    - https://palate-playground.onrender.com
+   - [Imgur](https://i.imgur.com/MQNTAa2.gifv)
 
 ## Navigate to:
 
