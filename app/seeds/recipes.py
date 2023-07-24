@@ -64,6 +64,18 @@ def seed_recipes():
         image_url='https://i.imgur.com/HSKWnPX.jpg'
     )
 
+    recipe5 = Recipe(
+        owner_id=3,
+        title='Egg Fried Rice',
+        protein_type='vegetarian',
+        steps='To make this delicious fried rice, start by beating the eggs in a bowl along with a pinch of salt and sliced green onions. Set this mixture aside. Slice the green onions diagonally for added visual appeal. Next, heat a wok or skillet over high heat and add 1 tablespoon of cooking oil, swirling it around to coat the surface. Pour the beaten eggs into the wok and scramble them. Once the eggs are about 3/4 cooked, add the remaining 2 tablespoons of cooking oil and the cold jasmine rice. Gently break down the rice and mix it with the eggs, allowing the flavors to combine. Day-old cold jasmine rice works best as it has a wonderful aroma and fluffy texture that holds up well during frying. Now, add soy sauce around the edge of the wok, creating a slightly burnt effect for a smoky and umami flavor. Adjust the salt according to your taste preferences and mix everything thoroughly. If needed, reduce the heat to low. Finally, turn off the heat and stir in the sliced green onions, enhancing the dish with their freshness and crunch. Enjoy!',
+        ingredients='Cooking oil, Egg, Day old  rice (best consistency to make fried rice), Soy Sauce, Garlic, Green onions',
+        prep_time='10 minutes',
+        cook_time='10 minutes',
+        steps_link="https://www.youtube.com/embed/qH__o17xHls",
+        image_url='https://i.imgur.com/57whSIm.jpg'
+    )
+
 
 
 
@@ -73,6 +85,7 @@ def seed_recipes():
     db.session.add(recipe2)
     db.session.add(recipe3)
     db.session.add(recipe4)
+    db.session.add(recipe5)
     db.session.commit()
 
 
