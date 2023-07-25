@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "./CurrRecipe.css";
 import RecipeCommentsComponent from "../CommentsComponent";
 import OpenModalButton from "../OpenModalButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaRegHeart, FaHeart }  from "react-icons/fa";
+import ConfirmFavoriteModal from "../ConfirmFavoriteModal";
 
 function CurrentRecipePage() {
   const dispatch = useDispatch();
@@ -34,15 +34,16 @@ function CurrentRecipePage() {
     if (currentRecipe.fave) {
       return (
         <OpenModalButton
-          buttonText={<FaHeart/>} 
-          style={{ color: "red", background: "none", width: "50px" }}
+          buttonText={<FaHeart/>}
+          modalComponent={<ConfirmFavoriteModal recipeId={currentRecipe.id}/>} 
+          style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
         />
       );
     } else {
       return (
         <OpenModalButton
           buttonText={<FaRegHeart/>}
-          style={{ color: "red", background: "none", width: "50px" }}
+          style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
         />
       );
     }
