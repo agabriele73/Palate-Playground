@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./CurrRecipe.css";
 import RecipeCommentsComponent from "../CommentsComponent";
+import OpenModalButton from "../OpenModalButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaRegHeart, FaHeart }  from "react-icons/fa";
 
 function CurrentRecipePage() {
   const dispatch = useDispatch();
@@ -27,6 +30,24 @@ function CurrentRecipePage() {
     );
   };
 
+  const display_faved = function () {
+    if (currentRecipe.fave) {
+      return (
+        <OpenModalButton
+          buttonText={<FaHeart/>} 
+          style={{ color: "red", background: "none", width: "50px" }}
+        />
+      );
+    } else {
+      return (
+        <OpenModalButton
+          buttonText={<FaRegHeart/>}
+          style={{ color: "red", background: "none", width: "50px" }}
+        />
+      );
+    }
+  }
+
   useEffect(() => {
     if (currentRecipe) {
       setIsLoading(false);
@@ -40,6 +61,9 @@ function CurrentRecipePage() {
       ) : (
         <div className="currentrecipe-container">
           <h1 className="recipe-title">{currentRecipe.title}</h1>
+          <div style={{ display: "flex" }}>
+          {display_faved()}
+          </div>
           <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
 
           <div className="recipe-info-grid">
