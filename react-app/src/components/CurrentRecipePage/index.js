@@ -7,11 +7,13 @@ import RecipeCommentsComponent from "../CommentsComponent";
 import OpenModalButton from "../OpenModalButton";
 import { FaRegHeart, FaHeart }  from "react-icons/fa";
 import ConfirmFavoriteModal from "../ConfirmFavoriteModal";
+import ConfirmFavoriteDeleteModal from "../ConfirmFavoriteDeleteModal";
 
 function CurrentRecipePage() {
   const dispatch = useDispatch();
   const { recipe_id } = useParams();
   const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
+  const userId = useSelector((state) => state.session.user.id);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,18 +33,19 @@ function CurrentRecipePage() {
   };
 
   const display_faved = function () {
-    if (currentRecipe.fave) {
+    if (currentRecipe.fave && currentRecipe.owner_id !== userId) {
       return (
         <OpenModalButton
           buttonText={<FaHeart/>}
-          modalComponent={<ConfirmFavoriteModal recipeId={currentRecipe.id}/>} 
+          modalComponent={<ConfirmFavoriteDeleteModal/>} 
           style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
         />
       );
-    } else {
+    } else if(currentRecipe.owner_id !== userId) {
       return (
         <OpenModalButton
           buttonText={<FaRegHeart/>}
+          modalComponent={<ConfirmFavoriteModal/>}
           style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
         />
       );
