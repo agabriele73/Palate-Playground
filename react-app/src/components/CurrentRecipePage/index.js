@@ -14,7 +14,7 @@ function CurrentRecipePage() {
   const dispatch = useDispatch();
   const { recipe_id } = useParams();
   const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
-  const userId = useSelector((state) => state.session.user.id);
+  const user = useSelector((state) => state.session.user);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function CurrentRecipePage() {
   };
 
   const display_faved = function () {
-    if (currentRecipe.fave && currentRecipe.owner_id !== userId) {
+    if (user && currentRecipe.fave && currentRecipe.owner_id !== user.id) {
       return (
         <OpenModalButton
           buttonText={<FaHeart/>}
@@ -44,7 +44,7 @@ function CurrentRecipePage() {
           style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
         />
       );
-    } else if(currentRecipe.owner_id !== userId) {
+    } else if(user && currentRecipe.owner_id !== user.id) {
       return (
         <OpenModalButton
           buttonText={<FaRegHeart/>}
