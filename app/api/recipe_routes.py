@@ -80,7 +80,7 @@ def get_recipe_byId(recipe_id):
     recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
     owner = [ owner.username for owner in recipe_owners]
     recipe_fave = Favorite.query.filter_by(recipe_id=recipe.id).all()
-    fave = [ fave.fave for fave in recipe_fave]
+    fave = [ fave.to_dict() for fave in recipe_fave]
     if not fave:
         fave = False
     recipe_dict = {

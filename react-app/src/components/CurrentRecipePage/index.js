@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as recipeActions from "../../store/recipe";
+import * as favoriteActions from "../../store/favorite";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./CurrRecipe.css";
@@ -18,6 +19,8 @@ function CurrentRecipePage() {
 
   useEffect(() => {
     dispatch(recipeActions.setCurrentRecipeThunk(recipe_id));
+    dispatch(favoriteActions.fetchFavoritesThunk());
+
   }, [dispatch, recipe_id]);
 
   const ingredientsList = function () {
@@ -37,7 +40,7 @@ function CurrentRecipePage() {
       return (
         <OpenModalButton
           buttonText={<FaHeart/>}
-          modalComponent={<ConfirmFavoriteDeleteModal/>} 
+          modalComponent={<ConfirmFavoriteDeleteModal faveId={currentRecipe.fave[0].id} recipeId={currentRecipe.id}/>} 
           style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
         />
       );
@@ -45,7 +48,7 @@ function CurrentRecipePage() {
       return (
         <OpenModalButton
           buttonText={<FaRegHeart/>}
-          modalComponent={<ConfirmFavoriteModal/>}
+          modalComponent={<ConfirmFavoriteModal recipeId={currentRecipe.id}/>}
           style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
         />
       );
