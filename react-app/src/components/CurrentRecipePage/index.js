@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import * as recipeActions from "../../store/recipe";
+import * as favoriteActions from "../../store/favorite";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./CurrRecipe.css";
 import RecipeCommentsComponent from "../CommentsComponent";
+import OpenModalButton from "../OpenModalButton";
+import { FaRegHeart, FaHeart }  from "react-icons/fa";
+import ConfirmFavoriteModal from "../ConfirmFavoriteModal";
+import ConfirmFavoriteDeleteModal from "../ConfirmFavoriteDeleteModal";
 
 function CurrentRecipePage() {
   const dispatch = useDispatch();
   const { recipe_id } = useParams();
   const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
+  const userId = useSelector((state) => state.session.user.id);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch(recipeActions.setCurrentRecipeThunk(recipe_id));
+    dispatch(favoriteActions.fetchFavoritesThunk());
+
   }, [dispatch, recipe_id]);
 
   const ingredientsList = function () {
@@ -27,6 +35,26 @@ function CurrentRecipePage() {
     );
   };
 
+  const display_faved = function () {
+    if (currentRecipe.fave && currentRecipe.owner_id !== userId) {
+      return (
+        <OpenModalButton
+          buttonText={<FaHeart/>}
+          modalComponent={<ConfirmFavoriteDeleteModal faveId={currentRecipe.fave[0].id} recipeId={currentRecipe.id}/>} 
+          style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
+        />
+      );
+    } else if(currentRecipe.owner_id !== userId) {
+      return (
+        <OpenModalButton
+          buttonText={<FaRegHeart/>}
+          modalComponent={<ConfirmFavoriteModal recipeId={currentRecipe.id}/>}
+          style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
+        />
+      );
+    }
+  }
+
   useEffect(() => {
     if (currentRecipe) {
       setIsLoading(false);
@@ -40,6 +68,9 @@ function CurrentRecipePage() {
       ) : (
         <div className="currentrecipe-container">
           <h1 className="recipe-title">{currentRecipe.title}</h1>
+          <div style={{ display: "flex" }}>
+          {display_faved()}
+          </div>
           <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
 
           <div className="recipe-info-grid">

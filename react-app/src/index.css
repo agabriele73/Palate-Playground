@@ -67,3 +67,6 @@ ul {
     color: red;
 }
 
+button {
+    cursor: pointer;
+}

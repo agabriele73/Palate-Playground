@@ -24,6 +24,10 @@ def get_all_recipes():
     for recipe in recipes:
         recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
         owner = [ owner.username for owner in recipe_owners]
+        recipe_favorite = Favorite.query.filter_by(recipe_id=recipe.id).all()
+        fave = [ fave.fave for fave in recipe_favorite]
+        if not fave:
+            fave = False
 
         recipe_dict = {
             'id': recipe.id,
@@ -36,7 +40,8 @@ def get_all_recipes():
             'cook_time': recipe.cook_time,
             'steps_link': recipe.steps_link,
             'image_url': recipe.image_url,
-            'owner': owner
+            'owner': owner,
+            'fave': fave
         }
 
         recipe_data.append(recipe_dict)
@@ -74,7 +79,10 @@ def get_recipe_byId(recipe_id):
     recipe = Recipe.query.get(recipe_id)
     recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
     owner = [ owner.username for owner in recipe_owners]
-
+    recipe_fave = Favorite.query.filter_by(recipe_id=recipe.id).all()
+    fave = [ fave.to_dict() for fave in recipe_fave]
+    if not fave:
+        fave = False
     recipe_dict = {
         'id': recipe.id,
         'owner_id': recipe.owner_id,
@@ -86,7 +94,9 @@ def get_recipe_byId(recipe_id):
         'cook_time': recipe.cook_time,
         'steps_link': recipe.steps_link,
         'image_url': recipe.image_url,
-        'owner': owner
+        'owner': owner,
+        'fave': fave
+
     }
 
     return jsonify(recipe_dict)
