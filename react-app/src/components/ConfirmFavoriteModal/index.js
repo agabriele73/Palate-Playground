@@ -21,7 +21,7 @@ function ConfirmFavoriteModal({ recipeId }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="confirm-delete">
             <h2>Are you sure you want to add recipe to your favorites?</h2>
             <button type="submit">Yes</button>
             <button onClick={closeModal}>No</button>
