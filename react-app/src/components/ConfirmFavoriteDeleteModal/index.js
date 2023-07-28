@@ -17,7 +17,7 @@ function ConfirmFavoriteDeleteModal({ faveId, recipeId }) {
     }
 
     return (
-        <div>
+        <div className="confirm-delete">
             <h2>Are you sure you want to remove recipe from your favorites?</h2>
             <button onClick={handleDelete}>Yes</button>
             <button onClick={closeModal}>No</button>

@@ -100,3 +100,11 @@
         z-index: 1;
     }
 }
+
+.favorite-button button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    width: 75px;
+    font-size: 20px;
+}

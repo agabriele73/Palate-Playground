@@ -39,17 +39,19 @@ function CurrentRecipePage() {
     if (user && currentRecipe.fave && currentRecipe.owner_id !== user.id) {
       return (
         <OpenModalButton
-          buttonText={<FaHeart/>}
+          buttonText={<FaHeart style={{ color: "#FEFEFE"}}/>}
           modalComponent={<ConfirmFavoriteDeleteModal faveId={currentRecipe.fave[0].id} recipeId={currentRecipe.id}/>} 
-          style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
+          style={{width: "75px", cursor: "pointer" }}
+          className="solid-heart"
         />
       );
     } else if(user && currentRecipe.owner_id !== user.id) {
       return (
         <OpenModalButton
-          buttonText={<FaRegHeart/>}
+          buttonText={<FaRegHeart style={{ color: "#FEFEFE"}}/>}
           modalComponent={<ConfirmFavoriteModal recipeId={currentRecipe.id}/>}
-          style={{ color: "red", background: "none", width: "50px", cursor: "pointer" }}
+          style={{ width: "75px", cursor: "pointer" }}
+          className="reg-heart"
         />
       );
     }
@@ -68,9 +70,9 @@ function CurrentRecipePage() {
       ) : (
         <div className="currentrecipe-container">
           <h1 className="recipe-title">{currentRecipe.title}</h1>
-          <div style={{ display: "flex" }}>
+          {/* <div style={{ display: "flex" }} className="favorite-button">
           {display_faved()}
-          </div>
+          </div> */}
           <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
 
           <div className="recipe-info-grid">
@@ -80,6 +82,9 @@ function CurrentRecipePage() {
               className="recipe-img"
             />
             <div className="recipe-video">
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "right" }} className="favorite-button">
+              {display_faved()}
+            </div>
               <h3>follow along: </h3>
               <iframe
                 width="560"
