@@ -26,6 +26,12 @@ def get_all_recipes():
         owner = [ owner.username for owner in recipe_owners]
         recipe_favorite = Favorite.query.filter_by(recipe_id=recipe.id).all()
         fave = [ fave.fave for fave in recipe_favorite]
+        recipe_rating = Rating.query.filter_by(recipe_id=recipe.id).all()
+        ratings = [ rating.rating for rating in recipe_rating]
+        print('--------', sum(ratings)/len(ratings))
+        avg_rating = sum(ratings)/len(ratings)
+        rounded_avg_rating = round(avg_rating, 1)
+
         if not fave:
             fave = False
 
@@ -41,7 +47,9 @@ def get_all_recipes():
             'steps_link': recipe.steps_link,
             'image_url': recipe.image_url,
             'owner': owner,
-            'fave': fave
+            'fave': fave,
+            'ratings': ratings,
+            'avg_rating': rounded_avg_rating
         }
 
         recipe_data.append(recipe_dict)
@@ -81,6 +89,11 @@ def get_recipe_byId(recipe_id):
     owner = [ owner.username for owner in recipe_owners]
     recipe_fave = Favorite.query.filter_by(recipe_id=recipe.id).all()
     fave = [ fave.to_dict() for fave in recipe_fave]
+    recipe_rating = Rating.query.filter_by(recipe_id=recipe.id).all()
+    ratings = [ rating.rating for rating in recipe_rating]
+    print('--------', sum(ratings)/len(ratings))
+    avg_rating = sum(ratings)/len(ratings)
+    rounded_avg_rating = round(avg_rating, 1)
     if not fave:
         fave = False
     recipe_dict = {
@@ -95,8 +108,8 @@ def get_recipe_byId(recipe_id):
         'steps_link': recipe.steps_link,
         'image_url': recipe.image_url,
         'owner': owner,
-        'fave': fave
-
+        'fave': fave,
+        'avg_rating': rounded_avg_rating
     }
 
     return jsonify(recipe_dict)

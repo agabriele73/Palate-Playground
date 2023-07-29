@@ -9,6 +9,11 @@ import OpenModalButton from "../OpenModalButton";
 import { FaRegHeart, FaHeart }  from "react-icons/fa";
 import ConfirmFavoriteModal from "../ConfirmFavoriteModal";
 import ConfirmFavoriteDeleteModal from "../ConfirmFavoriteDeleteModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaStar } from 'react-icons/fa';
+
+
+
 
 function CurrentRecipePage() {
   const dispatch = useDispatch();
@@ -34,6 +39,20 @@ function CurrentRecipePage() {
       </ol>
     );
   };
+
+
+  const generateStars = (avgRating) => {
+    const roundedRating = Math.round(avgRating); // Round the average rating to the nearest integer
+    const stars = Array.from({ length: 5 }, (_, index) => {
+      return index < roundedRating ? (
+        <FaStar key={index} size={30} color="#ffc107" />
+      ) : (
+        <FaStar key={index} size={30} color="#e4e5e9" />
+      );
+    });
+    return stars;
+  };
+  
 
   const display_faved = function () {
     if (user && currentRecipe.fave && currentRecipe.owner_id !== user.id) {
@@ -61,6 +80,7 @@ function CurrentRecipePage() {
     if (currentRecipe) {
       setIsLoading(false);
     }
+    console.log("current recipe", generateStars(currentRecipe.avg_rating));
   }, [currentRecipe]);
 
   return (
@@ -76,11 +96,15 @@ function CurrentRecipePage() {
           <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
 
           <div className="recipe-info-grid">
+            <div>
             <img
               src={currentRecipe.image_url}
               alt={currentRecipe.title}
               className="recipe-img"
             />
+            <p style={{ fontSize: "20px", alignItems: "center" }}> Rating: {generateStars(currentRecipe.avg_rating)}</p>
+            </div>
+
             <div className="recipe-video">
             <div style={{ display: "flex", textShadow: "2px 2px 5px 2px #080808",alignItems: "flex-start", justifyContent: "right" }} className="favorite-button">
               {display_faved()}
