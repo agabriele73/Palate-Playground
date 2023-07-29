@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from app.forms import RecipeForm, FavoriteForm
-from app.models import Recipe, User, Favorite, db
+from app.forms import RecipeForm, FavoriteForm, RatingForm
+from app.models import Recipe, User, Favorite, Rating, db
 
 recipe_routes = Blueprint('recipes', __name__)
 def validation_errors_to_error_messages(validation_errors):
@@ -213,3 +213,37 @@ def favorite_recipe(recipe_id):
         return jsonify(favorite.to_dict())
 
     return {'errors': validation_errors_to_error_messages(fave_form.errors)}, 401
+
+
+
+@recipe_routes.route('/<int:recipe_id>/rating', methods=['POST'])
+@login_required
+def rate_recipe(recipe_id):
+    rating_form = RatingForm()
+    rating_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if rating_form.validate_on_submit():
+        recipe = Recipe.query.get(recipe_id)
+
+        if not recipe:
+            return jsonify({'message': 'Recipe not found'}), 404
+        
+        rating_exists = Rating.query.filter_by(user_id=current_user.id, recipe_id=recipe_id).first()
+        if rating_exists:
+            return jsonify({'message': 'You already rated this recipe'}), 401
+        
+        if recipe.owner_id == current_user.id:
+            return jsonify({'message': 'You own this recipe'}), 401
+        
+        rating = Rating(
+            rating=rating_form.data['rating'],
+            user_id=current_user.id,
+            recipe_id=recipe_id
+        )
+
+        db.session.add(rating)
+        db.session.commit()
+
+        return jsonify(rating.to_dict())
+    
+    return {'errors': validation_errors_to_error_messages(rating_form.errors)}, 401

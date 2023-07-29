@@ -17,7 +17,6 @@ def seed_ratings():
         Rating(rating=4.8, user_id=3, recipe_id=5),
         Rating(rating=5, user_id=1, recipe_id=5),
         Rating(rating=4.5, user_id=2, recipe_id=6),
-        Rating(rating=3.6, user_id=1, recipe_id=6),
     ]
     db.session.bulk_save_objects(ratings)
     db.session.commit()
