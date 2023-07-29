@@ -4,3 +4,4 @@ from .user import User
 from .recipe import Recipe
 from .comment import Comment
 from .favorite import Favorite
+from .rating import Rating
