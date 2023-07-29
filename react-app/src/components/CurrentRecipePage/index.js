@@ -42,14 +42,14 @@ function CurrentRecipePage() {
 
 
   const generateStars = (avgRating) => {
-    const roundedRating = Math.round(avgRating); // Round the average rating to the nearest integer
-    const stars = Array.from({ length: 5 }, (_, index) => {
-      return index < roundedRating ? (
-        <FaStar key={index} size={30} color="#ffc107" />
-      ) : (
-        <FaStar key={index} size={30} color="#e4e5e9" />
-      );
-    });
+    const roundedRating = Math.round(avgRating);
+    const stars = []
+    for (let i =0; i < 5; i++) {
+      const starColor = i < roundedRating ? "#ffc107" : "#e4e5e9";
+      stars.push(
+        <FaStar key={i} size={30} color={starColor}/>
+      )
+    }
     return stars;
   };
   
@@ -80,7 +80,6 @@ function CurrentRecipePage() {
     if (currentRecipe) {
       setIsLoading(false);
     }
-    console.log("current recipe", generateStars(currentRecipe.avg_rating));
   }, [currentRecipe]);
 
   return (
