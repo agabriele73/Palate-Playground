@@ -3,6 +3,8 @@ body {
     background-color: #ABAC7F;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     font-family: 'Oswald', sans-serif;
+    color: #080808;
+    font-size: large;
 }
 
 h1 {
@@ -36,6 +38,7 @@ ul {
     margin: 5px;
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
+    color: #FFFFF0;
 }
 
 .user-info button {
@@ -44,6 +47,7 @@ ul {
     box-shadow: 0 0 5px 0 #080808;
     border: #080808 solid 2px;
     font-family: 'Oswald', sans-serif;
+    color: #FFFFF0;
 }
 
 .user-info button:hover {

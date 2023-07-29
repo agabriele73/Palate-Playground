@@ -27,12 +27,12 @@
   padding: 20px;
 }
 
-.profile-button{
+.profile-button {
   display: flex;
   background-color: transparent;
   background: none;
   border: none;
-  color: #373d20;
+  color: #FAEBD7;
   cursor: pointer;
   font-size: 40px;
   transition: box-shadow 0.3s ease;

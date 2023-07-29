@@ -37,12 +37,12 @@ function RecipeHomePage() {
                     <NavLink to={`/recipes/${recipe.id}`} className="recipe-link">
                         <div key={recipe.id} className="recipe-card">
                             <img src={recipe.image_url} alt={recipe.images} />
-                            <h4>
+                            <h2>
                                 {recipe.title}
-                            </h4>
-                            <h6>
+                            </h2>
+                            <h4>
                                 recipe by {recipe.owner}
-                            </h6>
+                            </h4>
                         </div>
                     </NavLink>
                 ))}

@@ -14,11 +14,13 @@
     margin-bottom: 10px;
     background-color: #717731;
     border-radius: 4px;
+    color: #FFFFF0;
 }
 
 .comment-form-container button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+    color: #000000;
 }
 
 .comment-form-container textarea {

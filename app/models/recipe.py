@@ -21,6 +21,7 @@ class Recipe(db.Model):
     owned_recipe = db.relationship('User', back_populates='recipe_owner')
     comments_on_recipe = db.relationship('Comment', back_populates='recipe_comment')
     recipe_favorites = db.relationship('Favorite', back_populates='favorites_recipe')
+    recipe_ratings = db.relationship('Rating', back_populates='ratings_recipe')
 
     def to_dict(self):
         return {

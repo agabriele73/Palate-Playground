@@ -82,7 +82,7 @@ function CurrentRecipePage() {
               className="recipe-img"
             />
             <div className="recipe-video">
-            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "right" }} className="favorite-button">
+            <div style={{ display: "flex", textShadow: "2px 2px 5px 2px #080808",alignItems: "flex-start", justifyContent: "right" }} className="favorite-button">
               {display_faved()}
             </div>
               <h3>follow along: </h3>

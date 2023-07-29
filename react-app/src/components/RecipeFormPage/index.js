@@ -135,7 +135,7 @@ function RecipeFormPage() {
                 <div className="form-item">
                 <label>
                     Ingredients:
-                    <h6>please seperate your ingredients with a comma to ensure display properly</h6>
+                    <h6>please seperate your ingredients with a comma to ensure they display properly. Thank You!</h6>
                     <textarea
                         type="text"
                         placeholder="Add your ingredients... ingredient 1, ingredient 2, ingredient 3"
