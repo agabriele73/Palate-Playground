@@ -48,6 +48,7 @@
     flex-direction: row;
     margin: 10px;
     border-radius: 5px;
+    color: #FFFFF0;
 }
 
 .edit-delete button:hover {

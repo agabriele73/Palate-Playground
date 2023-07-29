@@ -16,7 +16,7 @@ const Footer = () => {
                     }}
                     >
                     <a
-                        href="https://www.linkedin.com/in/alfonso-gabriel-b8733a23a"
+                        href="https://www.linkedin.com/in/alfonsogswe"
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
@@ -25,11 +25,11 @@ const Footer = () => {
                             gap: "10px",
                             }}
                     >
-                        <p style={{color: "#FEFEFE"}}>
+                        <p style={{color: "#000000"}}>
 
                             Owner's LinkedIn:
                         </p>
-                    <i className="fab fa-linkedin" style={{ fontSize: "3rem", color: "#FEFEFE"}}></i>
+                    <i className="fab fa-linkedin" style={{ fontSize: "3rem", color: "#000000"}}></i>
                     </a>
                     <a
                         href="https://github.com/agabriele73"
@@ -41,11 +41,11 @@ const Footer = () => {
                         gap: "10px",
                         }}
                     >
-                        <p style={{color: "#FEFEFE"}}>
+                        <p style={{color: "#000000"}}>
 
                             Project Owner:
                         </p>
-                    <i className="fab fa-github" style={{ fontSize: "3rem", color: "#FEFEFE"}}></i>
+                    <i className="fab fa-github" style={{ fontSize: "3rem", color: "#000000"}}></i>
                     </a>
                 </div>
             </div>

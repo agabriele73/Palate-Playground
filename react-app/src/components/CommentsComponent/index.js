@@ -105,7 +105,7 @@ function RecipeCommentsComponent({ recipeId }) {
                     )}
                     {commentStates[comment.id] ? (
                         <>
-                        <form onSubmit={(e) => handleSaveEdit(comment.id)}>
+                        <form onSubmit={(e) => handleSaveEdit(comment.id)} className="edit-comment">
                             <textarea
                                 value={editedComment || comment.comment}
                                 onChange={(e) => setEditedComment(e.target.value)}

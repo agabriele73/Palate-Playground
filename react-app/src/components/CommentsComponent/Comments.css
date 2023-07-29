@@ -102,4 +102,20 @@
     background-color: #717731;
     width: 150px;
     cursor: pointer;
+    color: #FFFFF0;
+}
+
+.edit-comment button {
+    margin: 4px;
+    background-color: #717731;
+    color: #FFFFF0;
+    font-family: 'Oswald', sans-serif;
+    border: 1px solid #080808;
+    padding: 10px;
+}
+
+.edit-comment button:hover {
+    cursor: pointer;
+    transform: perspective(1px) scale(1.1);
+
 }

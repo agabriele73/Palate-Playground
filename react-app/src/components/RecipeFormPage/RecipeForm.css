@@ -3,11 +3,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #080808;
 }
 
 .recipe-form h1 {
-    color: #373D20;
+    color: #080808;
     font-family: 'Oswald', sans-serif;
+    font-size: 50px;
 }
 
 .form-grid {
@@ -47,8 +49,10 @@
 .recipe-image label {
     display: flex;
     flex-direction: column;
-    color: #373D20;
+    color: #080808;
     font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .recipe-image input {
@@ -85,6 +89,7 @@
     background-color: #ccc;
     cursor: not-allowed;
     transform: none;
+    color: #080808;
 }
 .form-item {
     display: block;
@@ -97,8 +102,10 @@
 .form-item label {
     display: flex;
     flex-direction: column;
-    color: #373D20;
+    color: #080808;
     font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .form-item input {
@@ -142,7 +149,7 @@
 
 .form-item h6 {
     text-decoration: underline;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .file-upload {
