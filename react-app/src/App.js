@@ -11,6 +11,7 @@ import BeefRecipesPage from "./components/BeefRecipesPage";
 import SeafoodRecipesPage from "./components/SeafoodRecipesPage";
 import VegetarianRecipesPage from "./components/VegetarianRecipesPage";
 import Footer from "./components/Footer";
+import * as ratingActions from "./store/rating";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -19,6 +20,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
+    dispatch(ratingActions.setRatingsThunk());
   }, [dispatch]);
 
   return (
