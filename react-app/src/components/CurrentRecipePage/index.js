@@ -11,6 +11,8 @@ import ConfirmFavoriteModal from "../ConfirmFavoriteModal";
 import ConfirmFavoriteDeleteModal from "../ConfirmFavoriteDeleteModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from 'react-icons/fa';
+import * as ratingActions from "../../store/rating";
+
 
 
 
@@ -21,12 +23,25 @@ function CurrentRecipePage() {
   const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
   const user = useSelector((state) => state.session.user);
   const [isLoading, setIsLoading] = useState(true);
-
+  const currUserRatings = useSelector((state) => state.rating.userRatings.Ratings);
+  
+  useEffect(() => {
+    if (currentRecipe) {
+      setIsLoading(false);
+    }
+  }, [currentRecipe]);
+  
   useEffect(() => {
     dispatch(recipeActions.setCurrentRecipeThunk(recipe_id));
+    dispatch(ratingActions.setRatingsThunk());
     dispatch(favoriteActions.fetchFavoritesThunk());
-
+    console.log("recipe_id", recipe_id);
+    console.log("currUserRatings", currUserRatings);
+    console.log("ratedRecipe", ratedRecipes);
   }, [dispatch, recipe_id]);
+  
+  const ratedRecipes = currUserRatings ? Object.values(currUserRatings).filter((rating) => currentRecipe && (rating.recipe_id === currentRecipe.id)) : [];
+
 
   const ingredientsList = function () {
     const ingredientsArr = currentRecipe.ingredients.split(/,(?![^\s,]+)/);
@@ -52,6 +67,18 @@ function CurrentRecipePage() {
     }
     return stars;
   };
+
+  const postRatingButton = function () {
+    if (user && currentRecipe.owner_id !== user.id && !ratedRecipes.length) {
+      return (
+        <OpenModalButton
+          buttonText={<FaStar style={{ color: "#FEFEFE"}}/>}
+          style={{ width: "75px", cursor: "pointer" }}
+          className="reg-heart"
+        />
+      );
+    }
+  }
   
 
   const display_faved = function () {
@@ -76,11 +103,6 @@ function CurrentRecipePage() {
     }
   }
 
-  useEffect(() => {
-    if (currentRecipe) {
-      setIsLoading(false);
-    }
-  }, [currentRecipe]);
 
   return (
     <>
@@ -102,6 +124,7 @@ function CurrentRecipePage() {
               className="recipe-img"
             />
             <p style={{ fontSize: "20px", alignItems: "center" }}> Rating: {generateStars(currentRecipe.avg_rating)}</p>
+            {postRatingButton()}
             </div>
 
             <div className="recipe-video">

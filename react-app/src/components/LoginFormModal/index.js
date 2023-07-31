@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { login } from "../../store/session";
+import * as ratingActions from "../../store/rating";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { GoogleLogin } from "react-google-login";
@@ -29,6 +30,7 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    dispatch(ratingActions.setRatingsThunk());
     if (data) {
       setErrors(data);
     } else {
