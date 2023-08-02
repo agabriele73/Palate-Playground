@@ -6,7 +6,7 @@ import { useModal } from "../../context/Modal";
 import { GoogleLogin } from "react-google-login";
 import "./LoginForm.css";
 
-const clientId = '689349869162-9k0cu2evj319324dp3bnk5j7dolt5gei.apps.googleusercontent.com'
+// const clientId = '689349869162-9k0cu2evj319324dp3bnk5j7dolt5gei.apps.googleusercontent.com'
 
 function LoginFormModal() {
   const dispatch = useDispatch();

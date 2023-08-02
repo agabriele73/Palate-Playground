@@ -9,9 +9,9 @@ import OpenModalButton from "../OpenModalButton";
 import { FaRegHeart, FaHeart }  from "react-icons/fa";
 import ConfirmFavoriteModal from "../ConfirmFavoriteModal";
 import ConfirmFavoriteDeleteModal from "../ConfirmFavoriteDeleteModal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from 'react-icons/fa';
 import * as ratingActions from "../../store/rating";
+import RatingForm from "../RatingForm";
 
 
 
@@ -35,9 +35,6 @@ function CurrentRecipePage() {
     dispatch(recipeActions.setCurrentRecipeThunk(recipe_id));
     dispatch(ratingActions.setRatingsThunk());
     dispatch(favoriteActions.fetchFavoritesThunk());
-    console.log("recipe_id", recipe_id);
-    console.log("currUserRatings", currUserRatings);
-    console.log("ratedRecipe", ratedRecipes);
   }, [dispatch, recipe_id]);
   
   const ratedRecipes = currUserRatings ? Object.values(currUserRatings).filter((rating) => currentRecipe && (rating.recipe_id === currentRecipe.id)) : [];
@@ -57,22 +54,36 @@ function CurrentRecipePage() {
 
 
   const generateStars = (avgRating) => {
-    const roundedRating = Math.round(avgRating);
-    const stars = []
-    for (let i =0; i < 5; i++) {
-      const starColor = i < roundedRating ? "#ffc107" : "#e4e5e9";
-      stars.push(
-        <FaStar key={i} size={30} color={starColor}/>
-      )
+    const fullStars = Math.floor(avgRating);
+    const decimal = avgRating - fullStars;
+    const stars = [];
+  
+    for (let i = 0; i < fullStars; i++) {
+      stars.push({ index: i, color: "#ffc107" });
     }
-    return stars;
+  
+    if (decimal >= 0.25 && decimal <= 0.75) {
+      stars.push({ index: fullStars, color: "#ffc107" });
+    } else if (decimal > 0.75) {
+      stars.push({ index: fullStars, color: "#ffc107" });
+    }
+  
+    for (let i = stars.length; i < 5; i++) {
+      stars.push({ index: i, color: "#e4e5e9" });
+    }
+  
+    return stars.map((star) => (
+      <FaStar key={star.index} size={30} style={{ color: star.color }} />
+    ));
   };
+  
 
   const postRatingButton = function () {
     if (user && currentRecipe.owner_id !== user.id && !ratedRecipes.length) {
       return (
         <OpenModalButton
           buttonText={<FaStar style={{ color: "#FEFEFE"}}/>}
+          modalComponent={<RatingForm recipeId={currentRecipe.id}/>}
           style={{ width: "75px", cursor: "pointer" }}
           className="reg-heart"
         />
