@@ -9,9 +9,9 @@ import OpenModalButton from "../OpenModalButton";
 import { FaRegHeart, FaHeart }  from "react-icons/fa";
 import ConfirmFavoriteModal from "../ConfirmFavoriteModal";
 import ConfirmFavoriteDeleteModal from "../ConfirmFavoriteDeleteModal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from 'react-icons/fa';
 import * as ratingActions from "../../store/rating";
+import RatingForm from "../RatingForm";
 
 
 
@@ -83,6 +83,7 @@ function CurrentRecipePage() {
       return (
         <OpenModalButton
           buttonText={<FaStar style={{ color: "#FEFEFE"}}/>}
+          modalComponent={<RatingForm recipeId={currentRecipe.id}/>}
           style={{ width: "75px", cursor: "pointer" }}
           className="reg-heart"
         />
