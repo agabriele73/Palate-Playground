@@ -23,7 +23,7 @@ function CurrentRecipePage() {
   const currentRecipe = useSelector((state) => state.recipe.currentRecipe);
   const user = useSelector((state) => state.session.user);
   const [isLoading, setIsLoading] = useState(true);
-  const currUserRatings = useSelector((state) => state.rating.userRatings.Ratings);
+  const currUserRatings = useSelector((state) => state.rating.userRatings);
   
   useEffect(() => {
     if (currentRecipe) {
