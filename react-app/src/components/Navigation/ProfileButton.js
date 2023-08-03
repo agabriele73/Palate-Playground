@@ -51,6 +51,11 @@ function ProfileButton({ user }) {
     setShowMenu(false);
   }
 
+  const manageRatings = () => {
+    history.push("/my-ratings");
+    setShowMenu(false);
+  }
+
   return (
     <>
       <button onClick={openMenu} className="profile-button">
@@ -66,6 +71,9 @@ function ProfileButton({ user }) {
             </li>
             <li>
               <button onClick={recipeFormRedirect}>Add a Recipe</button>
+            </li>
+            <li>
+              <button onClick={manageRatings}>Manage Ratings</button>
             </li>
             <li>
               <button onClick={handleLogout}>Log Out</button>

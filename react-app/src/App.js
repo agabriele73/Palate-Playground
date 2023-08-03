@@ -10,6 +10,7 @@ import ChickenRecipesPage from "./components/ChickenRecipesPage";
 import BeefRecipesPage from "./components/BeefRecipesPage";
 import SeafoodRecipesPage from "./components/SeafoodRecipesPage";
 import VegetarianRecipesPage from "./components/VegetarianRecipesPage";
+import UserRatings from "./components/UserRatings";
 import Footer from "./components/Footer";
 import * as ratingActions from "./store/rating";
 import { authenticate } from "./store/session";
@@ -52,6 +53,9 @@ function App() {
             </Route>
             <Route exact path="/recipes/vegetarian">
               <VegetarianRecipesPage />
+            </Route>
+            <Route exact path="/my-ratings">
+              <UserRatings/>
             </Route>
             <Route exact path="/recipes/:recipe_id">
               <CurrentRecipePage />

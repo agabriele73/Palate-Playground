@@ -82,7 +82,7 @@ function CurrentRecipePage() {
     if (user && currentRecipe.owner_id !== user.id && !ratedRecipes.length) {
       return (
         <OpenModalButton
-          buttonText={<FaStar style={{ color: "#FEFEFE"}}/>}
+          buttonText="Post a rating"
           modalComponent={<RatingForm recipeId={currentRecipe.id}/>}
           style={{ width: "75px", cursor: "pointer" }}
           className="reg-heart"
@@ -135,7 +135,9 @@ function CurrentRecipePage() {
               className="recipe-img"
             />
             <p style={{ fontSize: "20px", alignItems: "center" }}> Rating: {generateStars(currentRecipe.avg_rating)}</p>
+            <p>
             {postRatingButton()}
+            </p>
             </div>
 
             <div className="recipe-video">
