@@ -3,7 +3,8 @@ import * as ratingActions from "../../store/rating";
 import { useDispatch } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import { useModal } from "../../context/Modal";
-const RatingForm = () => {
+
+const RatingForm = ( { recipeId } ) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const [hoveredRating, setHoveredRating] = useState(null);
@@ -17,38 +18,60 @@ const RatingForm = () => {
         setSelectedRating(rating);
     };
 
+    const renderRatingInputs = () => {
+        return [1, 2, 3, 4, 5].map((rating) => (
+            <label key={rating}>
+                <input 
+                    type="radio"
+                    name="rating"
+                    value={rating}
+                    style={{ display: "none"}}
+                    onMouseEnter={() => handleStarHover(rating)}
+                    onMouseLeave={() => setHoveredRating(null)}
+                    onClick={() => handleStarClick(rating)}
+                />
+                <FaStar 
+                    size={50}
+                    style={{
+                        cursor: "pointer",
+                        color: rating <= (hoveredRating || selectedRating) ? "gold" : "gray",
+                    }}
+                />
+            </label>
+        ));
+    };
+
+    const renderSelectedRating = () => {
+        if (selectedRating !== null) {
+            return <p>Selected rating: {selectedRating}</p>;
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(selectedRating)
+        const newRating = {
+            rating: selectedRating
+        }
+        console.log(newRating)
+        await dispatch(ratingActions.postRatingThunk(newRating, recipeId));
+        dispatch(ratingActions.setRatingsThunk());
+        closeModal();
+    }
+
     return (
         <div>
             <h1>Rating Form</h1>
-            <form>
-                {[1, 2, 3, 4, 5].map((rating) => (
-                    <label>
-                        <input 
-                            type="radio"
-                            name="rating"
-                            value={rating}
-                            style={{ display: "none"}}
-                            onMouseEnter={() => handleStarHover(rating)}
-                            onMouseLeave={() => setHoveredRating(null)}
-                            onClick={() => handleStarClick(rating)}
-                        />
-                        <FaStar 
-                            size={50}
-                            style={{
-                                cursor: "pointer",
-                                color: rating <= (hoveredRating || selectedRating) ? "gold" : "gray",
-                            }}
-                        />
-                    </label>
-                ))}
-            </form>
-            {selectedRating !== null && <p>Selected rating: {selectedRating}</p>}
+            <form onSubmit={handleSubmit}>
+            {renderRatingInputs()}
             <button type="submit" disabled={selectedRating === null}>
                 Submit
             </button>
             <button onClick={closeModal}>Cancel</button>
+            </form>
+            {renderSelectedRating()}
         </div>
-    )
-}
+    );
+};
 
 export default RatingForm;
