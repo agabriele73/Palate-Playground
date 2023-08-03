@@ -1,5 +1,6 @@
 const SET_RATINGS = "ratings/SET_RATINGS";
 const POST_RATING = "ratings/POST_RATING";
+const DELETE_RATING = "ratings/DELETE_RATING";
 
 
 const initialState = {
@@ -13,6 +14,11 @@ const setRatings = (ratings) => ({
 
 const postRating = (rating) => ({
     type: POST_RATING,
+    payload: rating
+})
+
+const deleteRating = (rating) => ({
+    type: DELETE_RATING,
     payload: rating
 })
 
@@ -39,6 +45,16 @@ export const postRatingThunk = (rating, recipeId) => async (dispatch) => {
     }
 }
 
+export const deleteRatingThunk = (ratingId) => async (dispatch) => {
+    const response = await fetch(`/api/ratings/${ratingId}`, {
+        method: "DELETE",
+    });
+    if (response.ok) {
+        dispatch(deleteRating(ratingId));
+
+    }
+}
+
 export default function ratingsReducer(state = initialState, action) {
     let newState= {...state};
     let normalizedRatings = {};
@@ -51,6 +67,9 @@ export default function ratingsReducer(state = initialState, action) {
             return newState;
         case POST_RATING:
             newState.userRatings[action.payload.id] = action.payload;
+            return newState;
+        case DELETE_RATING:
+            delete newState.userRatings[action.payload];
             return newState;
         default:
             return state;
