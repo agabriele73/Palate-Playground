@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as ratingActions from "../../store/rating";
+import * as recipeActions from "../../store/recipe";
 import { useDispatch } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import { useModal } from "../../context/Modal";
@@ -58,8 +59,8 @@ const RatingForm = ( { recipeId } ) => {
         console.log(newRating)
         await dispatch(ratingActions.postRatingThunk(newRating, recipeId));
         dispatch(ratingActions.setRatingsThunk());
+        dispatch(recipeActions.setCurrentRecipeThunk(recipeId));
         closeModal();
-        history.push(`/my-ratings`);
     }
 
     return (
