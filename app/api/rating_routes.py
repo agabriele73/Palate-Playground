@@ -13,7 +13,7 @@ def get_user_ratings():
         rating_owners = User.query.filter_by(id=rating.user_id).all()
         rating_recipes = Recipe.query.filter_by(id=rating.recipe_id).all()
         owner = [ owner.username for owner in rating_owners]
-        recipe = [ [{"id": recipe.id, "title": recipe.title}] for recipe in rating_recipes]
+        recipe = [ recipe.title for recipe in rating_recipes]
     
         rating_dict = {
             'id': rating.id,

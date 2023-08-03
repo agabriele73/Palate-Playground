@@ -3,12 +3,14 @@ import * as ratingActions from "../../store/rating";
 import { useDispatch } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom";
 
 const RatingForm = ( { recipeId } ) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const [hoveredRating, setHoveredRating] = useState(null);
     const [selectedRating, setSelectedRating] = useState(null);
+    const history = useHistory();
 
     const handleStarHover = (rating) => {
         setHoveredRating(rating);
@@ -57,6 +59,7 @@ const RatingForm = ( { recipeId } ) => {
         await dispatch(ratingActions.postRatingThunk(newRating, recipeId));
         dispatch(ratingActions.setRatingsThunk());
         closeModal();
+        history.push(`/my-ratings`);
     }
 
     return (
