@@ -1,0 +1,33 @@
+.user-ratings {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-ratings h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 50px;
+    text-decoration: underline;
+    color: #373d20;
+}
+
+.ratings {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.ratings div {
+    box-shadow: 0 0 5px 4px #080808;
+}
+
+.ratings button {
+    padding: 8px;
+    background-color: #373d20;
+    color: #FEFEFE;
+    font-family: 'Oswald', sans-serif;
+    border-radius: 6px;
+}
+
+.ratings button:hover {
+    transform: scale(1.1);
+}

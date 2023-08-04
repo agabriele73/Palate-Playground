@@ -17,6 +17,7 @@ import RatingForm from "../RatingForm";
 
 
 
+
 function CurrentRecipePage() {
   const dispatch = useDispatch();
   const { recipe_id } = useParams();
@@ -81,12 +82,13 @@ function CurrentRecipePage() {
   const postRatingButton = function () {
     if (user && currentRecipe.owner_id !== user.id && !ratedRecipes.length) {
       return (
-        <OpenModalButton
-          buttonText="Post a rating"
-          modalComponent={<RatingForm recipeId={currentRecipe.id}/>}
-          style={{ width: "75px", cursor: "pointer" }}
-          className="reg-heart"
-        />
+        <div className="post-rating">
+          <OpenModalButton
+            buttonText="Post a rating"
+            modalComponent={<RatingForm recipeId={currentRecipe.id}/>}
+            className="reg-heart"
+          />
+        </div>
       );
     }
   }

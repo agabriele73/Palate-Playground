@@ -64,14 +64,17 @@ const RatingForm = ( { recipeId } ) => {
     }
 
     return (
-        <div>
+        <div className="confirm-delete">
             <h1>Rating Form</h1>
             <form onSubmit={handleSubmit}>
             {renderRatingInputs()}
+            <br/>
+            <div style={{ justifyContent: "center", margin: "5px"}}>
             <button type="submit" disabled={selectedRating === null}>
                 Submit
             </button>
             <button onClick={closeModal}>Cancel</button>
+            </div>
             </form>
             {renderSelectedRating()}
         </div>
