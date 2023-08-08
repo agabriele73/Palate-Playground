@@ -32,6 +32,7 @@ function CurrentRecipePage() {
     }
   }, [currentRecipe]);
   
+  
   useEffect(() => {
     dispatch(recipeActions.setCurrentRecipeThunk(recipe_id));
     dispatch(ratingActions.setRatingsThunk());
