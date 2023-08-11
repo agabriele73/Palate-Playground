@@ -28,9 +28,13 @@ def get_all_recipes():
         fave = [ fave.fave for fave in recipe_favorite]
         recipe_rating = Rating.query.filter_by(recipe_id=recipe.id).all()
         ratings = [ rating.rating for rating in recipe_rating]
-        avg_rating = sum(ratings)/len(ratings)
-        rounded_avg_rating = round(avg_rating, 1)
 
+        if len(ratings) > 0:
+            avg_rating = sum(ratings)/len(ratings)
+            rounded_avg_rating = round(avg_rating, 1)
+        else:
+            rounded_avg_rating = 0.0
+            
         if not fave:
             fave = False
 
@@ -90,7 +94,8 @@ def get_recipe_byId(recipe_id):
     fave = [ fave.to_dict() for fave in recipe_fave]
     recipe_rating = Rating.query.filter_by(recipe_id=recipe.id).all()
     ratings = [ rating.rating for rating in recipe_rating]
-    avg_rating = sum(ratings)/len(ratings)
+    if ratings:
+        avg_rating = sum(ratings)/len(ratings)
     rounded_avg_rating = round(avg_rating, 1)
     if not fave:
         fave = False
