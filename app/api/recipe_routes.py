@@ -22,6 +22,7 @@ def get_all_recipes():
 
     recipe_data = []
     for recipe in recipes:
+        rounded_avg_rating = 0.0
         recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
         owner = [ owner.username for owner in recipe_owners]
         recipe_favorite = Favorite.query.filter_by(recipe_id=recipe.id).all()
@@ -34,7 +35,7 @@ def get_all_recipes():
             rounded_avg_rating = round(avg_rating, 1)
         else:
             rounded_avg_rating = 0.0
-            
+
         if not fave:
             fave = False
 
@@ -87,6 +88,7 @@ def get_my_recipes():
 
 @recipe_routes.route('/<int:recipe_id>', methods=['GET'])
 def get_recipe_byId(recipe_id):
+    rounded_avg_rating = 0.0
     recipe = Recipe.query.get(recipe_id)
     recipe_owners = User.query.filter_by(id=recipe.owner_id).all()
     owner = [ owner.username for owner in recipe_owners]
@@ -94,11 +96,16 @@ def get_recipe_byId(recipe_id):
     fave = [ fave.to_dict() for fave in recipe_fave]
     recipe_rating = Rating.query.filter_by(recipe_id=recipe.id).all()
     ratings = [ rating.rating for rating in recipe_rating]
-    if ratings:
+
+    if len(ratings) > 0:
         avg_rating = sum(ratings)/len(ratings)
-    rounded_avg_rating = round(avg_rating, 1)
+        rounded_avg_rating = round(avg_rating, 1)
+    else:
+        rounded_avg_rating = 0.0
+    
     if not fave:
         fave = False
+
     recipe_dict = {
         'id': recipe.id,
         'owner_id': recipe.owner_id,
