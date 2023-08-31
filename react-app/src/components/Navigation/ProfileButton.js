@@ -62,7 +62,7 @@ function ProfileButton({ user }) {
         <i className="fa-solid fa-bars" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        {user ? (
+        {user && (
           <div className="user-info">
             <li>{user.username}</li>
             <li>{user.email}</li>
@@ -79,21 +79,8 @@ function ProfileButton({ user }) {
               <button onClick={handleLogout}>Log Out</button>
             </li>
           </div>
-        ) : (
-          <div className="loginsignup-button">
-            <OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-
-            <OpenModalButton
-              buttonText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-          </div>
-        )}
+        )
+        }
       </ul>
     </>
   );

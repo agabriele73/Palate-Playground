@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import OpenModalButton from '../OpenModalButton';
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -23,11 +26,22 @@ function Navigation({ isLoaded }){
 					<h1>Palate PlayGround</h1>
 				</NavLink>
 			</li>
-			{isLoaded && (
-				<li>
-					<ProfileButton user={sessionUser} />
-				</li>
-			)}
+			{isLoaded && !sessionUser ? (
+				<div className="loginsignup-button">
+					<OpenModalButton
+					buttonText="Log In"
+					modalComponent={<LoginFormModal />}
+					/>
+						
+					<OpenModalButton
+					buttonText="Sign Up"
+					modalComponent={<SignupFormModal />}
+					/>
+				</div>
+				) : (
+				<ProfileButton user={sessionUser} />
+				)
+			}
 		</ol>
 		<nav className="nav-bar">
 			{/* <input 
