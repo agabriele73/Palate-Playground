@@ -41,7 +41,7 @@ function RecipeHomePage() {
                                 {recipe.title}
                             </h2>
                             <h4>
-                                recipe by {recipe.owner}
+                                Recipe by {recipe.owner}
                             </h4>
                         </div>
                     </NavLink>
