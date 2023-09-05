@@ -89,27 +89,31 @@ function LoginFormModal() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
+        <div className="login-form-inputs">
+          <label>
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <div className="login-form-buttons">
+          <button type="submit">Log In</button>
+          <button onClick={loginDemoUser}>Log In as Demo User</button>
+        </div>
       </form>
-      <button onClick={loginDemoUser}>Log In as Demo User</button>
         {/* <div class="g-signin2" data-onsuccess="handleGoogleSignIn"><button onClick={handleGoogleSignIn}>Sign In with Google</button></div>
         <div>
           <GoogleLogin
