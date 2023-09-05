@@ -4,17 +4,6 @@ from sqlalchemy.sql import text
 
 def seed_recipes():
 
-    demo = Recipe(
-        owner_id=1,
-        title='test title',
-        protein_type='chicken',
-        steps='test steps',
-        ingredients='test ingredients, ingredient, ingredient, ingredient, ingredient',
-        prep_time='test prep time',
-        cook_time='test cook time',
-        steps_link='https://www.youtube.com/embed/dKPFcfXj8I4',
-        image_url='https://i.imgur.com/tw3WrtL.png'
-    )
 
     recipe1 = Recipe(
         owner_id=2,
@@ -97,7 +86,6 @@ def seed_recipes():
 
 
 
-    db.session.add(demo)
     db.session.add(recipe1)
     db.session.add(recipe2)
     db.session.add(recipe3)
