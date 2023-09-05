@@ -19,15 +19,14 @@
     display: flex;
     font-size: 18px;
     flex-direction: column;
-    padding: 10px;
-    margin: 10px;
     gap: 10px;
 }
 
-.signup-form input {
+.signup-form-username input {
     padding: 10px;
     font-family: 'Oswald', sans-serif;
     border-radius: 4px;
+    margin: 10px;
 }
 
 .signup-form button {
@@ -48,4 +47,22 @@
     background-color: #8F9779;
     color: #FEFEFE;
     border: 2px solid #FEFEFE;
+}
+
+.signup-form-username {
+    display: flex;
+    flex-direction: row;
+}
+
+.signup-form-password {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form-password input {
+    max-width: 500px;
+    padding: 10px;
+    font-family: 'Oswald', sans-serif;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }

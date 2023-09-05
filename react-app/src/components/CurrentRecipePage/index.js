@@ -125,34 +125,27 @@ function CurrentRecipePage() {
       ) : (
         <div className="currentrecipe-container">
           <h1 className="recipe-title">{currentRecipe.title}</h1>
-          {/* <div style={{ display: "flex" }} className="favorite-button">
-          {display_faved()}
-          </div> */}
-          <h3 className="recipe-owner">recipe by {currentRecipe.owner}</h3>
-
           <div className="recipe-info-grid">
-            <div>
-            <img
-              src={currentRecipe.image_url}
-              alt={currentRecipe.title}
-              className="recipe-img"
-            />
+            <div className="recipe-img-owner">
+              <h3 className="recipe-owner">Recipe by {currentRecipe.owner}</h3>
+              <img
+                src={currentRecipe.image_url}
+                alt={currentRecipe.title}
+                className="recipe-img"
+              />
             <div className="recipe-times">
-            <p style={{ fontSize: "20px", alignItems: "center" }}> Rating: {generateStars(currentRecipe.avg_rating)}</p>
-            <p style={{ display: "flex", textShadow: "2px 2px 5px 2px #080808"}} className="favorite-button">
-            {display_faved()}
-            </p>
+              <p style={{ fontSize: "20px", alignItems: "center" }}> Rating: {generateStars(currentRecipe.avg_rating)}</p>
+              <p style={{ display: "flex", textShadow: "2px 2px 5px 2px #080808"}} className="favorite-button">
+              {display_faved()}
+              </p>
             </div>
-            <p>
-            {postRatingButton()}
-            </p>
+              <p>
+              {postRatingButton()}
+              </p>
             </div>
-
             <div className="recipe-video">
               <h3>follow along: </h3>
               <iframe
-                width="560"
-                height="315"
                 src={currentRecipe.steps_link}
                 title="YouTube video player"
                 frameBorder="0"

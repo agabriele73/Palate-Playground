@@ -28,7 +28,7 @@ function SeafoodRecipesPage() {
                             {recipe.title}
                         </h4>
                         <h4>
-                            recipe by {recipe.owner}
+                            Recipe by {recipe.owner}
                         </h4>
                         <p>
                             {recipe.steps.slice(0, 100)}...

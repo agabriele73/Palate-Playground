@@ -1,7 +1,6 @@
 /* TODO Add site wide styles */
 body {
     background-color: #ABAC7F;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     font-family: 'Oswald', sans-serif;
     color: #080808;
     font-size: large;
@@ -11,6 +10,7 @@ h1 {
     display: block;
     text-align: center;
     justify-content: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .homebutton-profile {
@@ -68,7 +68,10 @@ ul {
 }
 
 .error {
-    color: red;
+    color: #c20000;
+    list-style: none;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 10px;
 }
 
 button {

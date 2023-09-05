@@ -29,8 +29,10 @@ function RecipeFormPage() {
     const [stepsLink, setStepsLink] = useState("");
     const [recipeImage , setRecipeImage] = useState("");
     const [errors , setErrors] = useState([]);
+    const [stepsLinkErrors , setStepsLinkErrors] = useState("");
+    const [recipeImageErrors , setRecipeImageErrors] = useState("");
     const history = useHistory();
-    let newImage
+    // let newImage
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -66,7 +68,14 @@ function RecipeFormPage() {
             console.log(createdRecipe);
             
             if(createdRecipe && createdRecipe.errors) {
-                setErrors(createdRecipe.errors);
+                createdRecipe.errors.forEach(error => {
+                    if (error.includes("steps_link : Invalid youtube embed url")) {
+                        setStepsLinkErrors("Invalid Video Walkthrough URL");
+                    }
+                    if (error.includes("image_url : Invalid url format")) {
+                        setRecipeImageErrors("Invalid Image URL");
+                    }
+                })
             } else {
                 history.push(`/recipes/my-recipes`);
             }
@@ -88,9 +97,9 @@ function RecipeFormPage() {
             <h1>
                 Add Your Recipe!    
             </h1>
-            {errors.map((error, idx) => (
+            {/* {errors.map((error, idx) => (
                 <li key={idx} className="error">{error}</li>
-            ))}
+            ))} */}
             <form onSubmit={handleSubmit} className="form-grid">
                 <div className="form-item">
                 <label>
@@ -167,7 +176,11 @@ function RecipeFormPage() {
                 </div>
                 <br/>
                 <div className="form-item">
+                    {errors.map((error, idx) => (
+                        <li key={idx} className="error">{error}</li>
+                    ))}
                 <label>
+                    <li className="error">{stepsLinkErrors}</li>
                     Steps Link:
                     <input
                         type="text"
@@ -179,6 +192,7 @@ function RecipeFormPage() {
                 </div>
                 <div className="recipe-image">
                 <label>
+                <li className="error">{recipeImageErrors}</li>
                     Recipe Image:
                     <input
                         type="text"
