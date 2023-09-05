@@ -26,6 +26,7 @@
     margin-right: 100px;
     padding: 30px;
     text-align: left;
+    
 }
 
 .recipe-grid {
@@ -34,6 +35,12 @@
     margin: 20px;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+}
+
+.recipe-grid h2 {
+    font-family: 'Oswald', sans-serif;
+    display: block;
+    text-align: center;
 }
 
 .recipe-card {
