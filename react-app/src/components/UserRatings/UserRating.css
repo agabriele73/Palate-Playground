@@ -16,8 +16,14 @@
     grid-gap: 20px;
 }
 
-.ratings div {
+.ratings div:hover {
     box-shadow: 0 0 5px 4px #080808;
+}
+
+.ratings div {
+    width: 300px;
+    border: 2px solid #373d20;
+    padding: 10px;
 }
 
 .ratings button {
@@ -30,4 +36,7 @@
 
 .ratings button:hover {
     transform: scale(1.1);
+    cursor: pointer;
+    background-color: blanchedalmond;
+    color: #080808;
 }
